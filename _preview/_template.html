@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Preview</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .preview-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #1f2937;
+            color: #fff;
+            font-family: system-ui, sans-serif;
+            font-size: 0.8125rem;
+        }
+
+        .preview-bar__label {
+            margin-right: auto;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .preview-bar__btn {
+            padding: 0.25rem 0.75rem;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            font: inherit;
+            transition: background 0.15s ease;
+        }
+
+        .preview-bar__btn:hover,
+        .preview-bar__btn.is-active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .preview-frame {
+            margin-top: 2.5rem;
+            transition: max-width 0.3s ease;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-frame.is-constrained {
+            border-left: 1px dashed rgba(0, 0, 0, 0.1);
+            border-right: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="preview-bar">
+    <span class="preview-bar__label">Preview</span>
+    <button class="preview-bar__btn" data-width="375">Mobile</button>
+    <button class="preview-bar__btn" data-width="768">Tablet</button>
+    <button class="preview-bar__btn" data-width="1024">Desktop</button>
+    <button class="preview-bar__btn is-active" data-width="full">Full</button>
+</div>
+
+<div class="preview-frame" id="preview-frame">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- ─── Paste section <style>, <section>, and <script> blocks below ─── -->
+
+
+
+    <!-- ─── End section content ─── -->
+</div>
+
+<script>
+(function () {
+    var frame = document.getElementById('preview-frame');
+    var buttons = document.querySelectorAll('.preview-bar__btn');
+
+    buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            buttons.forEach(function (b) { b.classList.remove('is-active'); });
+            btn.classList.add('is-active');
+
+            var width = btn.getAttribute('data-width');
+            if (width === 'full') {
+                frame.style.maxWidth = 'none';
+                frame.classList.remove('is-constrained');
+            } else {
+                frame.style.maxWidth = width + 'px';
+                frame.classList.add('is-constrained');
+            }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

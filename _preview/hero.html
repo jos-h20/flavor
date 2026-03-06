@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<!-- ─── Styles ─────────────────────────────────────────────── -->
+<style>
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: var(--spacing-3xl) var(--spacing-md);
+    background-color: var(--color-bg-dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max-width-narrow);
+    text-align: center;
+}
+
+.hero__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-text-inverted);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero__subheading {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero__cta {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-inverted);
+    background-color: var(--color-primary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero__cta:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    color: var(--color-text-inverted);
+}
+
+.hero--dark {
+    background-color: var(--color-bg-dark);
+}
+
+.hero--dark::before {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.hero--minimal {
+    min-height: 60vh;
+    background-color: var(--color-bg);
+}
+
+.hero--minimal::before {
+    display: none;
+}
+
+.hero--minimal .hero__heading {
+    color: var(--color-text);
+}
+
+.hero--minimal .hero__subheading {
+    color: var(--color-text-light);
+}
+
+.hero--minimal .hero__cta {
+    color: var(--color-primary);
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+}
+
+.hero--minimal .hero__cta:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverted);
+}
+
+@media (min-width: 768px) {
+    .hero {
+        min-height: 85vh;
+        padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        min-height: 90vh;
+        padding: var(--spacing-3xl) var(--spacing-xl);
+    }
+
+    .hero__subheading {
+        max-width: 36rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+</style>
+
+<!-- ─── Markup ─────────────────────────────────────────────── -->
+<section class="hero hero--default" data-section="hero" style="background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920')">
+    <div class="hero__content">
+        <h1 class="hero__heading">Build Something Beautiful</h1>
+        <p class="hero__subheading">A starter hero section with parallax background, responsive typography, and multiple style variants.</p>
+        <a class="hero__cta" href="#">Get Started</a>
+    </div>
+</section>
+
+<!-- ─── Script ─────────────────────────────────────────────── -->
+<script>
+(function () {
+    var section = document.querySelector('[data-section="hero"]');
+    if (!section) return;
+
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    var ticking = false;
+
+    function updateParallax() {
+        var rect = section.getBoundingClientRect();
+        var scrolled = -rect.top;
+        var rate = scrolled * 0.3;
+        section.style.backgroundPositionY = rate + 'px';
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
