@@ -4,7 +4,7 @@
 
 This is a **zero-build WordPress theme** designed for rapid section-based page building. Each page section is a fully self-contained PHP file with its own inline CSS and JavaScript. There is no build step, no compiler, no bundler. You edit a file, refresh the browser, and it's live.
 
-The theme uses **ACF Flexible Content** as the layout engine. Each layout maps to a PHP file in `templates/sections/`. The dispatcher loads the matching file automatically.
+The theme uses **Carbon Fields** (free, bundled via Composer) as the layout engine. A `complex` field named `sections` provides flexible content layouts. Each layout maps to a PHP file in `templates/sections/`. The dispatcher loads the matching file automatically.
 
 ---
 
@@ -14,7 +14,9 @@ The theme uses **ACF Flexible Content** as the layout engine. Each layout maps t
 themes/flavor/
 ├── CLAUDE.md                  ← You are here
 ├── style.css                  ← Theme declaration + design tokens + base reset
-├── functions.php              ← Theme setup, ACF field registration, utilities
+├── composer.json              ← Carbon Fields dependency
+├── vendor/                    ← Composer packages (gitignored)
+├── functions.php              ← Theme setup, Carbon Fields boot, utilities
 ├── header.php                 ← Global site header
 ├── footer.php                 ← Global site footer
 ├── templates/
@@ -24,7 +26,6 @@ themes/flavor/
 │       ├── pricing-table.php
 │       ├── testimonials.php
 │       └── ...                ← Each section is one self-contained file
-├── acf-json/                  ← ACF local JSON sync (auto-managed by ACF)
 ├── assets/
 │   ├── fonts/                 ← Self-hosted web fonts (if any)
 │   └── images/                ← Theme-level images (logo, icons, fallbacks)
@@ -52,7 +53,8 @@ Every section is a single PHP file located at `templates/sections/{section-name}
  */
 
 // ─── Data ────────────────────────────────────────────────────
-$field = get_sub_field('field_name');
+// $section_data is passed from page-builder.php
+$field = $section_data['field_name'] ?? '';
 ?>
 
 <!-- ─── Styles ─────────────────────────────────────────────── -->
@@ -222,90 +224,79 @@ All sections must reference these variables from `style.css`. Never hardcode val
 
 ---
 
-## ACF Field Registration
+## Carbon Fields Registration
 
-All ACF fields are registered in code (not through the admin UI) so they're version-controlled. Fields are registered in `functions.php` or in a dedicated `includes/fields.php`.
+All fields are registered in code in `includes/fields.php`. The theme bundles Carbon Fields via Composer (`composer.json`). Run `composer install` after cloning.
 
-When creating a new section, also register its ACF fields using `acf_add_local_field_group()`. The layout name in the flexible content field **must exactly match** the section's PHP filename (without the `.php` extension).
+When creating a new section, add a new `->add_fields()` call to the `sections` complex field. The layout name **must exactly match** the section's PHP filename (without the `.php` extension).
 
 ### Field Registration Pattern
 
 ```php
-// In functions.php or includes/fields.php
-add_action('acf/init', function () {
-    if (!function_exists('acf_add_local_field_group')) return;
+// In includes/fields.php
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 
-    acf_add_local_field_group([
-        'key' => 'group_page_sections',
-        'title' => 'Page Sections',
-        'fields' => [
-            [
-                'key' => 'field_sections',
-                'label' => 'Sections',
-                'name' => 'sections',
-                'type' => 'flexible_content',
-                'button_label' => 'Add Section',
-                'layouts' => [
-                    'hero' => [
-                        'key' => 'layout_hero',
-                        'name' => 'hero',
-                        'label' => 'Hero',
-                        'sub_fields' => [
-                            ['key' => 'field_hero_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text'],
-                            ['key' => 'field_hero_subheading', 'label' => 'Subheading', 'name' => 'subheading', 'type' => 'textarea'],
-                            ['key' => 'field_hero_image', 'label' => 'Background Image', 'name' => 'background_image', 'type' => 'image', 'return_format' => 'array'],
-                        ],
-                    ],
-                    // ... more layouts
-                ],
-            ],
-        ],
-        'location' => [
-            [['param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-builder.php']],
-        ],
-    ]);
+add_action('carbon_fields_register_fields', function () {
+    Container::make('post_meta', 'Page Sections')
+        ->where('post_template', '=', 'templates/page-builder.php')
+        ->add_fields([
+            Field::make('complex', 'sections', 'Sections')
+                ->set_layout('tabbed-vertical')
+
+                ->add_fields('hero', 'Hero', [
+                    Field::make('text', 'heading', 'Heading'),
+                    Field::make('textarea', 'subheading', 'Subheading'),
+                    Field::make('image', 'background_image', 'Background Image'),
+                    Field::make('text', 'cta_url', 'CTA URL'),
+                    Field::make('text', 'cta_title', 'CTA Text'),
+                    Field::make('select', 'cta_target', 'CTA Target')
+                        ->set_options(['_self' => 'Same Window', '_blank' => 'New Tab']),
+                    Field::make('select', 'style', 'Style')
+                        ->set_options(['default' => 'Default', 'dark' => 'Dark', 'minimal' => 'Minimal']),
+                ]),
+                // ... more layouts
+        ]);
 });
 ```
 
-### ACF Field Conventions
-- **Keys are globally unique.** Use prefix pattern: `field_{section}_{fieldname}` and `layout_{section}`.
-- **Image fields:** Always use `'return_format' => 'array'` so you get `url`, `alt`, `width`, `height`.
-- **Repeater fields:** Return arrays of sub-field values. Loop with `foreach`.
+### Carbon Fields Conventions
+- **Image fields** return an attachment ID. Use `flavor_get_image_data($id)` to get `['url', 'alt', 'width', 'height']`.
+- **Link/CTA fields:** Carbon Fields has no link field. Use 3 flat fields: `cta_url` (text), `cta_title` (text), `cta_target` (select).
+- **Complex (repeater) fields:** Return arrays of associative arrays. Loop with `foreach`.
 - **WYSIWYG fields:** Output with `wp_kses_post()` for safety.
-- **Link fields:** Return arrays with `url`, `title`, `target`.
+- **Each section entry** has a `_type` key containing the layout name.
 
-### Common ACF Field Access Patterns
+### Common Field Access Patterns
 ```php
-// Text / Textarea
-$heading = get_sub_field('heading');
+// $section_data is passed from page-builder.php (an associative array)
 
-// Image (array format)
-$image = get_sub_field('image');
+// Text / Textarea
+$heading = $section_data['heading'] ?? '';
+
+// Image (returns attachment ID — convert with helper)
+$image = flavor_get_image_data($section_data['background_image'] ?? 0);
 // Use: $image['url'], $image['alt'], $image['width'], $image['height']
 
-// Link
-$link = get_sub_field('cta_link');
-// Use: $link['url'], $link['title'], $link['target']
+// CTA (flat fields assembled into array)
+$cta_url = $section_data['cta_url'] ?? '';
+$cta = $cta_url ? ['url' => $cta_url, 'title' => $section_data['cta_title'] ?? '', 'target' => $section_data['cta_target'] ?? '_self'] : null;
 
-// Repeater
-$items = get_sub_field('features');
+// Complex (repeater)
+$items = $section_data['features'] ?? [];
 // Loop: foreach ($items as $item) { echo $item['title']; }
 
 // WYSIWYG
-$content = get_sub_field('content');
+$content = $section_data['content'] ?? '';
 // Use: echo wp_kses_post($content);
 
-// True/False
-$show_bg = get_sub_field('show_background');
+// True/False (checkbox)
+$show_bg = $section_data['show_background'] ?? false;
 // Use: if ($show_bg) { ... }
 
 // Select / Radio
-$style = get_sub_field('style_variant');
+$style = $section_data['style'] ?? 'default';
 // Use as modifier class: class="hero hero--<?= esc_attr($style) ?>"
-
-// Gallery
-$images = get_sub_field('gallery');
-// Returns array of image arrays
 ```
 
 ---
@@ -335,7 +326,7 @@ $images = get_sub_field('gallery');
 
 ## Preview Files
 
-For standalone browser testing without WordPress, create a preview version at `_preview/{section-name}.html`. This is an identical copy of the section but with hardcoded dummy data instead of ACF calls.
+For standalone browser testing without WordPress, create a preview version at `_preview/{section-name}.html`. This is an identical copy of the section but with hardcoded dummy data instead of PHP calls.
 
 ### Preview Template
 ```html
@@ -350,7 +341,7 @@ For standalone browser testing without WordPress, create a preview version at `_
 <body>
 
 <!-- Paste the section's <style>, <section>, and <script> blocks here -->
-<!-- Replace all PHP/ACF calls with hardcoded sample data -->
+<!-- Replace all PHP/PHP calls with hardcoded sample data -->
 
 </body>
 </html>
@@ -363,9 +354,9 @@ For standalone browser testing without WordPress, create a preview version at `_
 When asked to create a new section, always do all of the following:
 
 1. **Create the section file** at `templates/sections/{name}.php` following the template format above.
-2. **Register the ACF fields** by adding a new layout to the flexible content group in `functions.php` (or `includes/fields.php`).
+2. **Register the Carbon Fields** by adding a new `->add_fields()` call in `includes/fields.php`.
 3. **Create a preview file** at `_preview/{name}.html` with dummy data.
-4. **Document the section** in the file header comment block: list all ACF fields with types and descriptions.
+4. **Document the section** in the file header comment block: list all fields with types and descriptions.
 
 ---
 
@@ -375,7 +366,7 @@ When asked to edit a section:
 
 1. Read the existing file first.
 2. Maintain all existing conventions (BEM naming, scoping, IIFE).
-3. If adding new ACF fields, also update the field registration.
+3. If adding new fields, also update the field registration in `includes/fields.php`.
 4. Update the preview file if it exists.
 
 ---
@@ -384,14 +375,14 @@ When asked to edit a section:
 
 ### Section with Style Variants
 ```php
-$variant = get_sub_field('style') ?: 'default';
+$variant = $section_data['style'] ?? 'default';
 ?>
 <section class="feature-grid feature-grid--<?= esc_attr($variant) ?>" data-section="feature-grid">
 ```
 
 ### Conditional Background Image
 ```php
-$bg = get_sub_field('background_image');
+$bg = flavor_get_image_data($section_data['background_image'] ?? 0);
 $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 ?>
 <section class="hero" data-section="hero" style="<?= esc_attr($style) ?>">
