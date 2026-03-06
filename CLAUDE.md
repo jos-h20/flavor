@@ -4,7 +4,9 @@
 
 This is a **zero-build WordPress theme** designed for rapid section-based page building. Each page section is a fully self-contained PHP file with its own inline CSS and JavaScript. There is no build step, no compiler, no bundler. You edit a file, refresh the browser, and it's live.
 
-The theme uses **Carbon Fields** (free, bundled via Composer) as the layout engine. A `complex` field named `sections` provides flexible content layouts. Each layout maps to a PHP file in `templates/sections/`. The dispatcher loads the matching file automatically.
+The theme uses **Carbon Fields** (free, bundled via Composer) for content editing. Field groups are registered **per page template** — each page template has its own scoped field registration so WP admin only shows relevant fields for that page.
+
+**Page structure is defined in code, not in the database.** Each page is a PHP template that includes sections in a fixed order. This enables full version control of page structure via git.
 
 ---
 
@@ -17,15 +19,19 @@ themes/flavor/
 ├── composer.json              ← Carbon Fields dependency
 ├── vendor/                    ← Composer packages (gitignored)
 ├── functions.php              ← Theme setup, Carbon Fields boot, utilities
-├── header.php                 ← Global site header
-├── footer.php                 ← Global site footer
+├── header.php                 ← Global site header (shared across all pages)
+├── footer.php                 ← Global site footer (shared across all pages)
+├── includes/
+│   └── fields.php             ← All Carbon Fields registration (per page template)
 ├── templates/
-│   ├── page-builder.php       ← Page template with flexible content loop
+│   ├── page-home.php          ← Home page template
+│   ├── page-about.php         ← About page template
+│   ├── page-services.php      ← Services page template
 │   └── sections/
-│       ├── hero.php
+│       ├── hero.php           ← Page-specific sections (default)
 │       ├── pricing-table.php
 │       ├── testimonials.php
-│       └── ...                ← Each section is one self-contained file
+│       └── ...
 ├── assets/
 │   ├── fonts/                 ← Self-hosted web fonts (if any)
 │   └── images/                ← Theme-level images (logo, icons, fallbacks)
@@ -36,9 +42,190 @@ themes/flavor/
 
 ---
 
+## Page Template Format
+
+Each page is a PHP template file that hardcodes which sections appear and in what order. Page structure is never stored in the database.
+
+### Template
+
+```php
+<?php
+/**
+ * Template Name: Home
+ */
+get_header(); ?>
+
+<main>
+    <?php include get_template_directory() . '/templates/sections/home-hero.php'; ?>
+    <?php include get_template_directory() . '/templates/sections/home-services.php'; ?>
+    <?php include get_template_directory() . '/templates/sections/home-testimonials.php'; ?>
+    <?php include get_template_directory() . '/templates/sections/home-contact-cta.php'; ?>
+</main>
+
+<?php get_footer();
+```
+
+### Page Template Rules
+
+- **One template per page.** Each page (home, about, services, etc.) has its own template file at `templates/page-{name}.php`.
+- **Sections are included in order.** The order in the template is the order on the page. To reorder sections, reorder the `include` lines.
+- **No dispatcher loop.** There is no flexible content loop. Sections are included directly.
+- **Header and footer are always global** via `get_header()` and `get_footer()`.
+- **Page structure lives in git.** Changing page structure means editing the template file and committing.
+
+---
+
+## Section Naming Convention
+
+Sections are **page-specific by default.** Prefix section filenames with the page name.
+
+```
+templates/sections/home-hero.php
+templates/sections/home-services.php
+templates/sections/about-hero.php
+templates/sections/about-team.php
+```
+
+**Carbon Fields field names follow the same prefix convention:**
+```
+home_hero_heading
+home_hero_subheading
+about_hero_heading
+about_hero_subheading
+```
+
+### Reusable Sections
+
+Header and footer are always global. All other sections start as page-specific.
+
+**Refactor to reusable only when a section is genuinely needed on multiple pages.** The trigger is being asked to build the same section concept for a second page. At that point, refactor the section to accept a field prefix parameter:
+
+```php
+<?php
+// templates/sections/shared-hero.php
+// Usage: include with $field_prefix set before including
+// e.g. $field_prefix = 'home'; include 'shared-hero.php';
+
+$heading = carbon_get_post_meta(get_the_ID(), $field_prefix . '_hero_heading');
+?>
+```
+
+**Never duplicate a section file.** If you catch yourself creating `about-hero.php` that is nearly identical to `home-hero.php`, stop and refactor to a shared section instead.
+
+---
+
+## When Building a New Page — Always Do All Three
+
+When asked to build a new page, always create all of the following in one shot:
+
+1. **The page template** at `templates/page-{name}.php` with sections included in order.
+2. **Each section file** at `templates/sections/{page}-{section}.php`.
+3. **Carbon Fields registration** in `includes/fields.php` scoped to that page template.
+
+Example prompt: *"Build a home page with hero, services grid, testimonials, and contact CTA"* should produce:
+- `templates/page-home.php`
+- `templates/sections/home-hero.php`
+- `templates/sections/home-services.php`
+- `templates/sections/home-testimonials.php`
+- `templates/sections/home-contact-cta.php`
+- Field registration in `includes/fields.php` for each section, scoped to `templates/page-home.php`
+
+---
+
+## Carbon Fields Registration
+
+All fields are registered in `includes/fields.php`. Field groups are scoped **per page template** so WP admin only shows relevant fields on the right pages.
+
+### Per-Template Registration Pattern
+
+```php
+// includes/fields.php
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
+add_action('carbon_fields_register_fields', function () {
+
+    // ── Home Page ─────────────────────────────────────────────
+    Container::make('post_meta', 'Home — Hero')
+        ->where('post_template', '=', 'templates/page-home.php')
+        ->add_fields([
+            Field::make('text', 'home_hero_heading', 'Heading'),
+            Field::make('textarea', 'home_hero_subheading', 'Subheading'),
+            Field::make('image', 'home_hero_background_image', 'Background Image'),
+            Field::make('text', 'home_hero_cta_url', 'CTA URL'),
+            Field::make('text', 'home_hero_cta_title', 'CTA Text'),
+            Field::make('select', 'home_hero_cta_target', 'CTA Target')
+                ->set_options(['_self' => 'Same Window', '_blank' => 'New Tab']),
+        ]);
+
+    Container::make('post_meta', 'Home — Services')
+        ->where('post_template', '=', 'templates/page-home.php')
+        ->add_fields([
+            Field::make('text', 'home_services_heading', 'Heading'),
+            Field::make('complex', 'home_services_items', 'Services')
+                ->add_fields([
+                    Field::make('text', 'title', 'Title'),
+                    Field::make('textarea', 'description', 'Description'),
+                    Field::make('image', 'icon', 'Icon'),
+                ]),
+        ]);
+
+    // ── About Page ────────────────────────────────────────────
+    Container::make('post_meta', 'About — Hero')
+        ->where('post_template', '=', 'templates/page-about.php')
+        ->add_fields([
+            Field::make('text', 'about_hero_heading', 'Heading'),
+            Field::make('textarea', 'about_hero_subheading', 'Subheading'),
+        ]);
+
+});
+```
+
+### Carbon Fields Conventions
+- **Field names are always prefixed** with `{page}_{section}_` e.g. `home_hero_heading`.
+- **Image fields** return an attachment ID. Use `flavor_get_image_data($id)` to get `['url', 'alt', 'width', 'height']`.
+- **Link/CTA fields:** Use 3 flat fields: `{prefix}_cta_url` (text), `{prefix}_cta_title` (text), `{prefix}_cta_target` (select).
+- **Complex (repeater) fields:** Return arrays of associative arrays. Loop with `foreach`.
+- **WYSIWYG fields:** Output with `wp_kses_post()` for safety.
+
+### Common Field Access Patterns
+```php
+// Direct post meta (no flexible content loop)
+$heading = carbon_get_post_meta(get_the_ID(), 'home_hero_heading');
+
+// Image (returns attachment ID — convert with helper)
+$image = flavor_get_image_data(carbon_get_post_meta(get_the_ID(), 'home_hero_background_image'));
+// Use: $image['url'], $image['alt'], $image['width'], $image['height']
+
+// CTA
+$cta_url = carbon_get_post_meta(get_the_ID(), 'home_hero_cta_url');
+$cta = $cta_url ? [
+    'url'    => $cta_url,
+    'title'  => carbon_get_post_meta(get_the_ID(), 'home_hero_cta_title'),
+    'target' => carbon_get_post_meta(get_the_ID(), 'home_hero_cta_target') ?: '_self',
+] : null;
+
+// Complex (repeater)
+$items = carbon_get_post_meta(get_the_ID(), 'home_services_items');
+// Loop: foreach ($items as $item) { echo $item['title']; }
+
+// WYSIWYG
+$content = carbon_get_post_meta(get_the_ID(), 'home_about_content');
+// Use: echo wp_kses_post($content);
+
+// True/False (checkbox)
+$show_bg = carbon_get_post_meta(get_the_ID(), 'home_hero_show_background');
+
+// Select / Radio
+$style = carbon_get_post_meta(get_the_ID(), 'home_hero_style') ?: 'default';
+// Use as modifier class: class="hero hero--<?= esc_attr($style) ?>"
+```
+
+---
+
 ## Section File Format
 
-Every section is a single PHP file located at `templates/sections/{section-name}.php`. The file contains everything that section needs — PHP data logic, CSS, HTML, and JavaScript — in that exact order.
+Every section is a single PHP file. The file contains everything that section needs — PHP data logic, CSS, HTML, and JavaScript — in that exact order.
 
 ### Template
 
@@ -46,6 +233,7 @@ Every section is a single PHP file located at `templates/sections/{section-name}
 <?php
 /**
  * Section: {Section Name}
+ * Page: {Page Name}
  * Description: {Brief description of what this section does}
  * Fields:
  *   - {field_name} ({field_type}): {description}
@@ -53,8 +241,8 @@ Every section is a single PHP file located at `templates/sections/{section-name}
  */
 
 // ─── Data ────────────────────────────────────────────────────
-// $section_data is passed from page-builder.php
-$field = $section_data['field_name'] ?? '';
+$post_id = get_the_ID();
+$heading = carbon_get_post_meta($post_id, 'home_hero_heading');
 ?>
 
 <!-- ─── Styles ─────────────────────────────────────────────── -->
@@ -85,6 +273,7 @@ $field = $section_data['field_name'] ?? '';
 - **Order matters:** PHP variables → `<style>` → `<section>` → `<script>`.
 - **No external stylesheets or script files.** All CSS and JS is inline in the section file.
 - **PHP variables are declared at the top** before any HTML output.
+- **No `$section_data` array.** Fields are fetched directly with `carbon_get_post_meta()`.
 
 ---
 
@@ -158,8 +347,8 @@ If a section genuinely needs a library (carousel, animation, maps), load it inli
 - **CountUp.js** (number animations): `https://cdn.jsdelivr.net/npm/countup.js@2/dist/countUp.umd.js`
 
 When using a CDN library:
-1. Load the CSS (if any) via a `<link>` tag inside the `<style>` area or as a separate tag before the `<style>` block.
-2. Load the JS via `<script src="..."></script>` immediately before the section's `<script>` block.
+1. Load the CSS (if any) via a `<link>` tag before the `<style>` block.
+2. Load the JS via `<script src="..."></script>` immediately before the section's inline `<script>` block.
 3. Always use a specific version number, never `@latest`.
 
 ---
@@ -224,83 +413,6 @@ All sections must reference these variables from `style.css`. Never hardcode val
 
 ---
 
-## Carbon Fields Registration
-
-All fields are registered in code in `includes/fields.php`. The theme bundles Carbon Fields via Composer (`composer.json`). Run `composer install` after cloning.
-
-When creating a new section, add a new `->add_fields()` call to the `sections` complex field. The layout name **must exactly match** the section's PHP filename (without the `.php` extension).
-
-### Field Registration Pattern
-
-```php
-// In includes/fields.php
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
-add_action('carbon_fields_register_fields', function () {
-    Container::make('post_meta', 'Page Sections')
-        ->where('post_template', '=', 'templates/page-builder.php')
-        ->add_fields([
-            Field::make('complex', 'sections', 'Sections')
-                ->set_layout('tabbed-vertical')
-
-                ->add_fields('hero', 'Hero', [
-                    Field::make('text', 'heading', 'Heading'),
-                    Field::make('textarea', 'subheading', 'Subheading'),
-                    Field::make('image', 'background_image', 'Background Image'),
-                    Field::make('text', 'cta_url', 'CTA URL'),
-                    Field::make('text', 'cta_title', 'CTA Text'),
-                    Field::make('select', 'cta_target', 'CTA Target')
-                        ->set_options(['_self' => 'Same Window', '_blank' => 'New Tab']),
-                    Field::make('select', 'style', 'Style')
-                        ->set_options(['default' => 'Default', 'dark' => 'Dark', 'minimal' => 'Minimal']),
-                ]),
-                // ... more layouts
-        ]);
-});
-```
-
-### Carbon Fields Conventions
-- **Image fields** return an attachment ID. Use `flavor_get_image_data($id)` to get `['url', 'alt', 'width', 'height']`.
-- **Link/CTA fields:** Carbon Fields has no link field. Use 3 flat fields: `cta_url` (text), `cta_title` (text), `cta_target` (select).
-- **Complex (repeater) fields:** Return arrays of associative arrays. Loop with `foreach`.
-- **WYSIWYG fields:** Output with `wp_kses_post()` for safety.
-- **Each section entry** has a `_type` key containing the layout name.
-
-### Common Field Access Patterns
-```php
-// $section_data is passed from page-builder.php (an associative array)
-
-// Text / Textarea
-$heading = $section_data['heading'] ?? '';
-
-// Image (returns attachment ID — convert with helper)
-$image = flavor_get_image_data($section_data['background_image'] ?? 0);
-// Use: $image['url'], $image['alt'], $image['width'], $image['height']
-
-// CTA (flat fields assembled into array)
-$cta_url = $section_data['cta_url'] ?? '';
-$cta = $cta_url ? ['url' => $cta_url, 'title' => $section_data['cta_title'] ?? '', 'target' => $section_data['cta_target'] ?? '_self'] : null;
-
-// Complex (repeater)
-$items = $section_data['features'] ?? [];
-// Loop: foreach ($items as $item) { echo $item['title']; }
-
-// WYSIWYG
-$content = $section_data['content'] ?? '';
-// Use: echo wp_kses_post($content);
-
-// True/False (checkbox)
-$show_bg = $section_data['show_background'] ?? false;
-// Use: if ($show_bg) { ... }
-
-// Select / Radio
-$style = $section_data['style'] ?? 'default';
-// Use as modifier class: class="hero hero--<?= esc_attr($style) ?>"
-```
-
----
-
 ## HTML Rules
 
 - **Semantic elements:** Use `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<figure>`, `<figcaption>`, etc.
@@ -341,7 +453,7 @@ For standalone browser testing without WordPress, create a preview version at `_
 <body>
 
 <!-- Paste the section's <style>, <section>, and <script> blocks here -->
-<!-- Replace all PHP/PHP calls with hardcoded sample data -->
+<!-- Replace all PHP calls with hardcoded sample data -->
 
 </body>
 </html>
@@ -349,25 +461,28 @@ For standalone browser testing without WordPress, create a preview version at `_
 
 ---
 
-## Creating a New Section — Checklist
+## Creating a New Page — Checklist
 
-When asked to create a new section, always do all of the following:
+When asked to create a new page, always do all of the following in one shot:
 
-1. **Create the section file** at `templates/sections/{name}.php` following the template format above.
-2. **Register the Carbon Fields** by adding a new `->add_fields()` call in `includes/fields.php`.
-3. **Create a preview file** at `_preview/{name}.html` with dummy data.
-4. **Document the section** in the file header comment block: list all fields with types and descriptions.
+1. **Create the page template** at `templates/page-{name}.php` with sections hardcoded in order.
+2. **Create each section file** at `templates/sections/{page}-{section}.php`.
+3. **Register Carbon Fields** in `includes/fields.php` with a separate `Container::make()` per section, scoped to that page template.
+4. **Create preview files** at `_preview/{page}-{section}.html` for each section.
+5. **Document each section** in its file header comment: list all fields with types and descriptions.
 
 ---
 
-## Editing an Existing Section
+## Editing an Existing Page — Checklist
 
-When asked to edit a section:
+When asked to edit a page:
 
-1. Read the existing file first.
-2. Maintain all existing conventions (BEM naming, scoping, IIFE).
-3. If adding new fields, also update the field registration in `includes/fields.php`.
-4. Update the preview file if it exists.
+1. Read the existing template and section files first.
+2. To reorder sections: edit the `include` order in the page template.
+3. To add a section: create the section file, add the `include` to the template, register new fields in `includes/fields.php`.
+4. To remove a section: remove the `include` line (keep the file unless explicitly told to delete it).
+5. Maintain all existing conventions (BEM naming, scoping, IIFE, field prefix).
+6. Update the preview file if it exists.
 
 ---
 
@@ -375,29 +490,29 @@ When asked to edit a section:
 
 ### Section with Style Variants
 ```php
-$variant = $section_data['style'] ?? 'default';
+$variant = carbon_get_post_meta(get_the_ID(), 'home_hero_style') ?: 'default';
 ?>
-<section class="feature-grid feature-grid--<?= esc_attr($variant) ?>" data-section="feature-grid">
+<section class="home-hero home-hero--<?= esc_attr($variant) ?>" data-section="home-hero">
 ```
 
 ### Conditional Background Image
 ```php
-$bg = flavor_get_image_data($section_data['background_image'] ?? 0);
+$bg = flavor_get_image_data(carbon_get_post_meta(get_the_ID(), 'home_hero_background_image'));
 $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 ?>
-<section class="hero" data-section="hero" style="<?= esc_attr($style) ?>">
+<section class="home-hero" data-section="home-hero" style="<?= esc_attr($style) ?>">
 ```
 
 ### Container Pattern
 ```php
-<section class="testimonials" data-section="testimonials">
-    <div class="testimonials__container">
+<section class="home-testimonials" data-section="home-testimonials">
+    <div class="home-testimonials__container">
         <!-- content constrained to max-width -->
     </div>
 </section>
 ```
 ```css
-.testimonials__container {
+.home-testimonials__container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--spacing-md);
@@ -406,20 +521,20 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 
 ### Responsive Grid
 ```css
-.feature-grid__items {
+.home-services__items {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
 }
 
 @media (min-width: 768px) {
-    .feature-grid__items {
+    .home-services__items {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
-    .feature-grid__items {
+    .home-services__items {
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -428,7 +543,7 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 ### Scroll-triggered Animations
 ```javascript
 (function() {
-    const section = document.querySelector('[data-section="stats"]');
+    const section = document.querySelector('[data-section="home-stats"]');
     if (!section) return;
 
     const observer = new IntersectionObserver((entries) => {
@@ -440,14 +555,32 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
         });
     }, { threshold: 0.2 });
 
-    section.querySelectorAll('.stats__item').forEach(el => observer.observe(el));
+    section.querySelectorAll('.home-stats__item').forEach(el => observer.observe(el));
 })();
+```
+
+---
+
+## Git Workflow
+
+Page structure is version controlled. Use descriptive commit messages:
+
+```
+git commit -m "home: initial page build"
+git commit -m "home: add testimonials section"
+git commit -m "home: reorder services above hero"
+git commit -m "home-hero: add video background option"
+git commit -m "about: initial page build"
 ```
 
 ---
 
 ## Things to Never Do
 
+- Never use a flexible content loop to assemble pages. Page structure is hardcoded in template files.
+- Never store page section order in the database.
+- Never create a section file without a matching field registration in `includes/fields.php`.
+- Never duplicate a section file across pages — refactor to a shared section with a field prefix parameter instead.
 - Never add anything to `style.css` from a section file. That file is theme-level only.
 - Never register `wp_enqueue_script` or `wp_enqueue_style` for section-specific assets.
 - Never use inline `onclick`, `onmouseover`, or other HTML event attributes.
@@ -458,3 +591,4 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 - Never hardcode colors, font families, or spacing values — always use custom properties.
 - Never use `position: fixed` or `position: sticky` without confirming it won't conflict with the site header/footer.
 - Never output unescaped user data. Always use `esc_html()`, `esc_attr()`, `esc_url()`, or `wp_kses_post()`.
+- Never hardcode image paths except for theme assets in `/assets/images/`. Always use Carbon Fields image fields.
