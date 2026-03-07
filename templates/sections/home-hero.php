@@ -146,7 +146,7 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
 
 .home-hero__cta--primary {
     font-family: var(--font-body);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -165,7 +165,7 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
 
 .home-hero__cta--ghost {
     font-family: var(--font-body);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
