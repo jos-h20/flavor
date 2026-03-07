@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
 
 /*
 Theme Name: Flavor
 Theme URI:
-Description: A zero-build WordPress theme for rapid section-based page building with ACF Flexible Content.
+Description: A zero-build WordPress theme for section-based page building. Built for Kanso Media.
 Version: 1.0.0
 Author: Kanso Media
 Author URI:
@@ -56,27 +56,40 @@ a {
 /* ─── Design Tokens ───────────────────────────────────────── */
 
 :root {
-    /* Colors */
-    --color-primary: #2563eb;
-    --color-primary-light: #60a5fa;
-    --color-primary-dark: #1d4ed8;
-    --color-secondary: #7c3aed;
-    --color-accent: #f59e0b;
-    --color-text: #1f2937;
-    --color-text-light: #6b7280;
-    --color-text-inverted: #ffffff;
-    --color-bg: #ffffff;
-    --color-bg-alt: #f9fafb;
-    --color-bg-dark: #111827;
-    --color-border: #e5e7eb;
+    /* ── Kanso Media Brand Palette ──────────────────────────── */
+    --color-navy-deep:   #0a1628;
+    --color-navy-mid:    #0f2040;
+    --color-navy-light:  #1a3557;
+    --color-slate:       #4a7fa5;
+    --color-slate-light: #7aafd4;
+    --color-white:       #e8f0f8;
+    --color-white-dim:   rgba(232, 240, 248, 0.55);
+    --color-white-faint: rgba(232, 240, 248, 0.15);
+    --color-km-blue:     #2276c4;
+    --color-km-brown:    #8a5929;
+    --color-km-green:    #137e1d;
+
+    /* ── Semantic Tokens ────────────────────────────────────── */
+    --color-primary:        var(--color-slate);
+    --color-primary-light:  var(--color-slate-light);
+    --color-primary-dark:   var(--color-km-blue);
+    --color-secondary:      var(--color-km-brown);
+    --color-accent:         var(--color-km-green);
+    --color-text:           var(--color-navy-deep);
+    --color-text-light:     var(--color-slate);
+    --color-text-inverted:  var(--color-white);
+    --color-bg:             var(--color-white);
+    --color-bg-alt:         #f0f5fa;
+    --color-bg-dark:        var(--color-navy-deep);
+    --color-border:         rgba(10, 22, 40, 0.12);
     --color-success: #10b981;
     --color-warning: #f59e0b;
-    --color-error: #ef4444;
+    --color-error:   #ef4444;
 
     /* Typography */
-    --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Jost', system-ui, -apple-system, sans-serif;
+    --font-mono:    'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
     /* Spacing */
     --spacing-xs: 0.25rem;

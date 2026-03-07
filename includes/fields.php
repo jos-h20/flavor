@@ -2,54 +2,45 @@
 /**
  * Carbon Fields Registration
  *
- * All fields are registered in code so they're version-controlled.
- * Each layout in the complex field corresponds to a section
- * file at templates/sections/{layout-name}.php.
+ * Field groups are scoped per page template. Each Container maps to one section.
+ * Field names follow the pattern: {page}_{section}_{field}
  *
- * --- How to Add a New Section Layout ---
+ * --- How to Add Fields for a New Page/Section ---
  *
- * 1. Add a new ->add_fields() call inside the 'sections' complex field below.
- * 2. Use this structure:
- *
- *    ->add_fields('my_section', 'My Section', [
- *        Field::make('text', 'heading', 'Heading'),
- *        // ... more fields
- *    ])
- *
- * 3. Create the matching file: templates/sections/my_section.php
- * 4. Create a preview: _preview/my_section.html
+ * Container::make('post_meta', 'Page — Section')
+ *     ->where('post_template', '=', 'templates/page-{name}.php')
+ *     ->add_fields([
+ *         Field::make('text', '{page}_{section}_{field}', 'Label'),
+ *     ]);
  */
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
 add_action('carbon_fields_register_fields', function () {
-    Container::make('post_meta', 'Page Sections')
-        ->where('post_template', '=', 'templates/page-builder.php')
+
+    // ── Home: Hero ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Home — Hero')
+        ->where('post_template', '=', 'templates/page-home.php')
         ->add_fields([
-            Field::make('complex', 'sections', 'Sections')
-                ->set_layout('tabbed-vertical')
-
-                // --- Hero ---
-                ->add_fields('hero', 'Hero', [
-                    Field::make('text', 'heading', 'Heading'),
-                    Field::make('textarea', 'subheading', 'Subheading')
-                        ->set_rows(3),
-                    Field::make('image', 'background_image', 'Background Image'),
-                    Field::make('text', 'cta_url', 'CTA URL'),
-                    Field::make('text', 'cta_title', 'CTA Text'),
-                    Field::make('select', 'cta_target', 'CTA Target')
-                        ->set_options([
-                            '_self' => 'Same Window',
-                            '_blank' => 'New Tab',
-                        ]),
-                    Field::make('select', 'style', 'Style')
-                        ->set_options([
-                            'default' => 'Default',
-                            'dark'    => 'Dark',
-                            'minimal' => 'Minimal',
-                        ]),
-                ]),
-
+            Field::make('text', 'home_hero_tagline_1', 'Tagline — Item 1')
+                ->set_default_value('iOS Apps'),
+            Field::make('text', 'home_hero_tagline_2', 'Tagline — Item 2')
+                ->set_default_value('AI-Powered'),
+            Field::make('text', 'home_hero_tagline_3', 'Tagline — Item 3')
+                ->set_default_value('Contract Work'),
+            Field::make('rich_text', 'home_hero_headline', 'Headline')
+                ->set_help_text('Main headline. Use <em> tags for italic accent colour. Default: "Software that does exactly what you need — <em>nothing more.</em>"'),
+            Field::make('textarea', 'home_hero_sub', 'Subtext')
+                ->set_rows(3)
+                ->set_help_text('Supporting paragraph below the headline.'),
+            Field::make('text', 'home_hero_cta_primary_url', 'Primary CTA — URL'),
+            Field::make('text', 'home_hero_cta_primary_title', 'Primary CTA — Label')
+                ->set_default_value('Our Apps'),
+            Field::make('text', 'home_hero_cta_ghost_url', 'Ghost CTA — URL'),
+            Field::make('text', 'home_hero_cta_ghost_title', 'Ghost CTA — Label')
+                ->set_default_value('Get In Touch'),
         ]);
+
 });

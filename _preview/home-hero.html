@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Hero Preview — Kanso Media</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            margin: 0;
+            background: var(--color-navy-deep);
+        }
+
+        /* Nav preview */
+        .preview-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 3rem;
+        }
+        .preview-nav svg { width: 180px; height: auto; }
+        .preview-nav ul  { display: flex; gap: 2.5rem; list-style: none; }
+        .preview-nav a   {
+            color: var(--color-white-dim);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 200;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav preview (hardcoded) -->
+<nav class="preview-nav">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-hidden="true">
+        <path fill="#e8f0f8" d="M398.463470,143.551666 C406.002014,152.200760 413.318146,160.574493 420.924957,169.280960 C422.329865,166.913513 421.844055,164.896378 421.845551,163.004303 C421.863647,140.171249 421.976593,117.336472 421.708618,94.506332 C421.648560,89.389671 423.317413,87.832863 428.280731,87.939285 C441.734497,88.227760 439.930084,87.040649 439.976471,99.342682 C440.094635,130.675186 440.060455,162.008270 440.081573,193.341125 C440.085968,199.891495 439.870880,199.766495 433.370087,200.165573 C427.354156,200.534851 423.131348,198.512192 419.155945,193.876205 C399.201111,170.605438 378.937958,147.598969 358.756958,124.522514 C357.363831,122.929504 356.241211,121.022743 353.580353,119.661827 C353.459442,122.428658 353.265747,124.830322 353.263367,127.232178 C353.241516,149.231842 353.255493,171.231567 353.252960,193.231262 C353.252197,199.951508 353.156677,200.113266 346.690216,200.027100 C333.896210,199.856644 335.090240,201.713730 335.070496,188.647308 C335.023468,157.481384 335.064301,126.315285 335.096313,95.149284 C335.103363,88.281296 335.288300,88.242722 342.049347,88.025520 C346.856140,87.871109 350.928009,88.380356 354.472107,92.580925 C368.867767,109.643059 383.620178,126.404182 398.463470,143.551666z"/>
+        <path fill="#e8f0f8" d="M96.381935,191.921661 C96.329453,200.019470 96.328674,200.089981 88.619965,200.004730 C77.797127,199.885040 78.026489,201.683975 78.054054,189.593658 C78.125824,158.120590 78.084587,126.647285 78.097977,95.174072 C78.100914,88.277443 78.269463,88.080345 84.998848,88.067596 C99.042351,88.040993 96.174561,87.571983 96.321800,99.067513 C96.503143,113.225380 96.359840,127.387199 96.425919,141.546982 C96.433990,143.276489 95.804047,145.239243 97.944565,147.067062 C103.602158,141.796753 109.307953,136.532471 114.957596,131.208588 C128.895065,118.074776 142.847290,104.956047 156.692535,91.725502 C159.272263,89.260300 162.007874,87.896141 165.583420,88.059776 C170.794174,88.298248 176.079559,87.549858 181.363892,88.731209 C180.682892,92.155884 177.983719,92.984581 176.249924,94.644196 C162.656906,107.655708 149.072556,120.678963 135.283966,133.481506 C132.002243,136.528549 132.332275,138.390610 135.162079,141.576050 C151.198380,159.627686 166.993210,177.893890 182.858322,196.097443 C183.592606,196.939957 184.519989,197.747223 184.198288,199.643188 C177.648926,199.643188 171.076904,199.899384 164.544418,199.503403 C162.276855,199.365936 161.016174,196.626495 159.480057,194.900131 C147.634659,181.587738 135.861176,168.211151 123.975143,154.935272 C118.861824,149.224060 118.755806,149.301697 113.167519,154.483032 C108.649193,158.672333 104.240219,162.984497 99.616371,167.053085 C97.141808,169.230484 96.184616,171.684189 96.304207,174.944077 C96.505630,180.434372 96.372108,185.936966 96.381935,191.921661z"/>
+        <path fill="#e8f0f8" d="M210.520660,191.435059 C206.075485,200.577072 200.833786,202.402893 189.068359,199.156479 C188.097534,197.157379 189.541824,195.679855 190.314789,194.121582 C207.180725,160.120758 224.111282,126.151901 240.911209,92.118546 C242.385651,89.131615 244.339859,88.079529 247.525208,87.987488 C260.735260,87.605789 260.607056,87.600998 266.579498,99.509460 C282.549011,131.351151 298.638367,163.132767 314.674744,194.940948 C315.262268,196.106384 315.793793,197.300049 316.818024,199.468338 C310.412170,200.290451 304.580322,200.361649 298.754181,199.533569 C296.952698,199.277527 296.461853,197.274857 295.729065,195.796646 C292.548645,189.380493 289.263062,183.012604 286.258972,176.514694 C284.896240,173.567169 283.112854,172.301346 279.755188,172.355637 C261.283508,172.654327 242.808655,172.816223 224.334534,172.853027 C220.668198,172.860336 218.537491,174.109650 217.134277,177.574539 C215.263107,182.194962 212.856613,186.598602 210.520660,191.435059 M230.357864,157.909775 C245.353439,157.909775 260.348999,157.909775 276.588135,157.909775 C268.640076,139.894974 260.296600,123.909683 251.723282,106.639412 C243.492325,123.573959 235.872894,139.235550 228.275040,154.907608 C227.589844,156.320953 227.666412,157.520020 230.357864,157.909775z"/>
+        <path fill="#e8f0f8" d="M559.399475,175.978653 C556.356323,186.892731 549.251587,193.659729 539.239746,196.994370 C515.338867,204.955078 492.261505,202.666718 470.400269,190.023849 C464.485504,186.603195 464.404083,185.765640 467.773621,179.812851 C469.139801,177.399307 469.943665,174.565155 472.224213,172.769043 C474.177002,172.851303 475.268921,174.264969 476.593292,175.187561 C492.549255,186.302765 510.082397,188.194946 528.629761,184.132431 C531.416748,183.521973 533.987244,182.333725 536.309082,180.629272 C544.874634,174.341415 544.293091,163.543518 534.902161,158.646988 C528.664429,155.394547 521.780090,153.877930 514.932251,152.409805 C505.968170,150.487976 497.098938,148.201401 488.425873,145.228210 C475.298828,140.728180 468.694855,132.409882 468.059418,119.800385 C467.496033,108.620186 474.828491,97.428383 486.295624,92.311417 C498.315704,86.947723 510.962646,85.794113 523.954285,86.946220 C533.362305,87.780533 542.251831,90.272652 550.724976,94.421783 C554.499390,96.270012 556.135376,98.446518 553.481262,102.568138 C551.807617,105.167137 551.193176,108.406433 549.014587,111.080742 C543.762756,109.004532 539.185974,105.903404 533.898743,104.378639 C521.948059,100.932236 510.041138,99.844559 498.096741,104.290710 C495.262207,105.345848 492.624054,106.792801 490.331116,108.755280 C484.296143,113.920441 484.761108,123.151611 491.256989,127.692154 C497.297638,131.914474 504.420105,133.157028 511.362122,134.864502 C521.859436,137.446396 532.620239,138.965744 542.675537,143.284332 C556.534546,149.236542 562.591492,160.670242 559.399475,175.978653z"/>
+        <path fill="#4a7fa5" d="M636.828369,215.074234 C623.509888,218.409805 613.157043,212.836472 603.456604,205.287140 C585.581299,191.375717 573.445374,173.772873 569.503784,151.162201 C568.480652,145.293213 567.619934,139.729340 570.052856,133.318268 C572.487549,126.902519 572.175110,119.280670 574.623901,112.519890 C577.097900,105.689339 579.077148,98.604645 583.822388,92.417130 C585.295288,93.553955 586.619385,94.464615 587.814636,95.521080 C590.507385,97.901207 593.221069,97.290192 595.067383,94.848579 C597.067566,92.203552 600.227112,90.474144 600.070984,85.936874 C599.970337,83.010696 604.289734,81.182068 606.311096,79.090546 C608.971069,78.583641 607.365234,80.956253 608.922424,81.489922 C615.746399,76.585556 623.565796,72.987724 631.705444,70.014320 C632.891296,69.581131 634.369934,68.657127 634.776001,67.600235 C636.785034,62.370838 640.475586,63.720490 644.486694,64.388962 C649.386047,65.205482 654.423157,65.154205 659.380249,65.673653 C668.577881,66.637466 677.214905,69.511627 685.450623,73.664742 C686.030518,73.957184 686.688110,74.134026 687.330261,74.244629 C687.567871,74.285553 687.864990,73.980644 688.363403,73.708954 C687.533203,71.652893 684.707947,71.378357 683.749512,68.150604 C692.678162,70.852722 701.391968,72.335831 708.064941,78.368347 C717.199341,86.626144 724.429199,96.332672 727.998840,108.357658 C728.535339,110.165115 729.465332,111.603973 730.568054,113.106850 C732.771851,116.110321 734.230286,119.514679 732.981750,123.337685 C732.514038,124.769691 732.193176,125.815651 733.690063,126.744675 C734.612976,127.317467 734.975952,128.307068 734.817688,129.354782 C733.115051,140.632568 734.709595,152.309402 731.617065,163.336929 C726.003662,183.353546 714.043884,198.976776 696.517273,210.169739 C688.319214,215.405197 679.405579,219.076675 669.764465,220.814743 C667.977905,221.136810 666.215393,221.719177 664.357300,220.757660 C672.735718,214.994980 683.322998,213.211853 691.507080,205.781113 C688.440430,204.733627 687.123230,206.329544 685.632019,207.127426 C680.775940,209.725723 675.889709,212.229065 670.370422,213.070541 C668.009277,213.430527 665.793701,214.197693 663.516052,211.873199 C661.378052,209.691223 657.915833,212.685944 654.547791,210.983902 C660.046570,207.698441 666.729553,210.168533 671.653442,205.505112 C668.355408,203.958405 669.313293,197.429657 663.070068,199.115524 C667.788452,196.344940 672.470581,193.509903 677.237610,190.825531 C680.646240,188.906067 683.387329,186.581055 685.229736,182.927658 C686.543396,180.322723 688.873352,178.203506 690.867493,175.972717 C706.166992,158.858124 707.805054,139.460190 700.079529,118.741699 C699.000732,115.848732 700.380249,113.162178 699.578918,110.944984 C698.193237,107.110489 696.070496,103.208626 693.271362,100.275513 C679.990967,86.359421 663.809570,80.005135 644.543518,83.582726 C625.006897,87.210564 609.376648,98.937889 602.063965,120.846550 C600.479492,121.593849 600.666626,119.064789 598.140259,119.678513 C597.914551,129.917480 598.721069,140.624542 599.688782,150.993256 C600.705383,161.886459 611.913513,168.044632 617.009033,177.863541 C611.614624,178.768494 609.294006,172.328445 603.550964,172.887848 C605.626465,176.350388 607.570374,179.064148 610.520203,180.050552 C618.005493,182.553619 624.304932,187.931702 632.569885,188.596146 C639.279785,189.135590 642.518982,194.308701 644.800964,199.790848 C646.936768,204.921906 643.418335,211.373184 636.828369,215.074234z"/>
+        <path fill="#4a7fa5" d="M489.114868,270.001251 C489.125275,264.846344 489.055939,260.189148 489.163544,255.536087 C489.303009,249.506058 494.016479,252.135254 496.969299,251.608078 C500.053497,251.057465 501.444824,252.305038 501.428925,255.692444 C501.323517,278.138489 501.331940,300.585419 501.403687,323.031708 C501.423065,329.103760 496.973267,326.926361 493.932770,327.326141 C490.603912,327.763824 488.969055,326.410461 489.214874,322.843140 C490.417084,305.395844 488.712524,287.949829 489.114868,270.001251z"/>
+    </svg>
+    <ul>
+        <li><a href="#">Apps</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Home Hero Section -->
+<style>
+body { background: var(--color-navy-deep); }
+
+.home-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--color-navy-deep) 0%, #0d1e38 40%, #101f35 70%, #0e1c30 100%);
+}
+.home-hero__stars { position: absolute; inset: 0; pointer-events: none; }
+.home-hero__star {
+    position: absolute;
+    background: var(--color-white);
+    border-radius: 50%;
+    opacity: 0;
+    animation: home-hero-twinkle var(--duration) ease-in-out var(--delay) infinite;
+}
+@keyframes home-hero-twinkle {
+    0%, 100% { opacity: 0; }
+    50%       { opacity: var(--max-opacity); }
+}
+.home-hero__geometry {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0;
+    animation: home-hero-geo-reveal 3s ease 0.8s forwards;
+}
+@keyframes home-hero-geo-reveal { from { opacity: 0; } to { opacity: 1; } }
+.home-hero__content {
+    position: relative; z-index: 10; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 1.5rem; padding: 0 2rem; margin-top: -80px;
+}
+.home-hero__tagline {
+    font-family: var(--font-body); font-weight: 200;
+    font-size: clamp(0.7rem, 1.5vw, 0.85rem); letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--color-slate-light);
+    opacity: 0; animation: home-hero-fade-up 1s ease 0.9s forwards;
+}
+.home-hero__headline {
+    font-family: var(--font-heading); font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.2rem); color: var(--color-white);
+    line-height: 1.2; max-width: 700px;
+    opacity: 0; animation: home-hero-fade-up 1s ease 1.1s forwards;
+}
+.home-hero__headline em { font-style: italic; color: var(--color-slate-light); }
+.home-hero__sub {
+    font-family: var(--font-body); font-weight: 200;
+    font-size: clamp(0.85rem, 1.5vw, 1rem); color: var(--color-white-dim);
+    line-height: 1.8; max-width: 500px;
+    opacity: 0; animation: home-hero-fade-up 1s ease 1.3s forwards;
+}
+.home-hero__ctas {
+    display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: home-hero-fade-up 1s ease 1.5s forwards; margin-top: 0.5rem;
+}
+.home-hero__cta--primary {
+    font-family: var(--font-body); font-weight: 300; font-size: 0.78rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--color-navy-deep); background: var(--color-slate-light);
+    padding: 0.85rem 2rem; text-decoration: none;
+    transition: background var(--transition-base); border-radius: 1px;
+}
+.home-hero__cta--primary:hover { background: var(--color-white); color: var(--color-navy-deep); }
+.home-hero__cta--ghost {
+    font-family: var(--font-body); font-weight: 300; font-size: 0.78rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--color-white-dim); background: none;
+    border: 1px solid var(--color-white-faint); padding: 0.85rem 2rem;
+    text-decoration: none; transition: border-color var(--transition-base), color var(--transition-base);
+    border-radius: 1px;
+}
+.home-hero__cta--ghost:hover { border-color: var(--color-slate-light); color: var(--color-slate-light); }
+@keyframes home-hero-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<section class="home-hero" data-section="home-hero">
+    <div class="home-hero__stars" id="home-hero-stars"></div>
+
+    <svg class="home-hero__geometry" id="home-hero-geometry" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path id="home-hero-m-peaks" fill="none" stroke="var(--color-km-blue)" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round" opacity="0.35"
+            d="M 100,660 L 420,140 L 700,420 L 980,140 L 1300,660"/>
+        <line x1="100" y1="660" x2="1300" y2="660" stroke="var(--color-km-brown)" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+        <line x1="700" y1="660" x2="100" y2="420" stroke="var(--color-km-green)" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+        <line x1="700" y1="660" x2="1300" y2="420" stroke="var(--color-km-green)" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+        <ellipse cx="700" cy="580" rx="90" ry="14" fill="none" stroke="var(--color-km-blue)" stroke-width="0.75" opacity="0.2"/>
+    </svg>
+
+    <div class="home-hero__content">
+        <p class="home-hero__tagline">iOS Apps &nbsp;·&nbsp; AI-Powered &nbsp;·&nbsp; Contract Work</p>
+        <h1 class="home-hero__headline">Software that does exactly what you need — <em>nothing more.</em></h1>
+        <p class="home-hero__sub">We build apps grounded in simplicity and privacy, using the best AI tools available. No bloat, no tracking, no noise.</p>
+        <div class="home-hero__ctas">
+            <a href="#" class="home-hero__cta--primary">Our Apps</a>
+            <a href="#" class="home-hero__cta--ghost">Get In Touch</a>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    var section   = document.querySelector('[data-section="home-hero"]');
+    var container = document.getElementById('home-hero-stars');
+    var mPath     = document.getElementById('home-hero-m-peaks');
+    var h1El      = section.querySelector('.home-hero__headline');
+
+    if (!section || !container || !mPath || !h1El) return;
+
+    var heroRect  = section.getBoundingClientRect();
+    var totalLen  = mPath.getTotalLength();
+    var svgEl     = mPath.ownerSVGElement;
+    var widthPx   = Math.ceil(heroRect.width);
+    var boundaryMap = new Float32Array(widthPx).fill(heroRect.height);
+
+    for (var i = 0; i <= 600; i++) {
+        var pt    = mPath.getPointAtLength((i / 600) * totalLen);
+        var svgPt = svgEl.createSVGPoint();
+        svgPt.x = pt.x; svgPt.y = pt.y;
+        var screenPt = svgPt.matrixTransform(mPath.getScreenCTM());
+        var px = Math.round(screenPt.x - heroRect.left);
+        var py = screenPt.y - heroRect.top;
+        if (px >= 0 && px < widthPx) boundaryMap[px] = Math.min(boundaryMap[px], py);
+    }
+
+    var lastValid = -1;
+    for (var x = 0; x < widthPx; x++) {
+        if (boundaryMap[x] < heroRect.height) {
+            if (lastValid >= 0 && x - lastValid > 1) {
+                var yS = boundaryMap[lastValid], yE = boundaryMap[x];
+                for (var f = lastValid + 1; f < x; f++) {
+                    boundaryMap[f] = yS + ((f - lastValid) / (x - lastValid)) * (yE - yS);
+                }
+            }
+            lastValid = x;
+        }
+    }
+
+    var h1Bottom = h1El.getBoundingClientRect().bottom - heroRect.top;
+    var placed = 0, attempts = 0;
+
+    while (placed < 120 && attempts < 1200) {
+        attempts++;
+        var xPx = Math.random() * heroRect.width;
+        var yPx = Math.random() * heroRect.height;
+        if (yPx >= h1Bottom) continue;
+        var idx      = Math.round(xPx);
+        var boundary = (idx >= 0 && idx < boundaryMap.length) ? boundaryMap[idx] : heroRect.height;
+        if (yPx >= boundary - 8) continue;
+
+        var star = document.createElement('div');
+        star.className = 'home-hero__star';
+        var size = Math.random() * 2 + 0.5;
+        star.style.cssText = [
+            'width:' + size + 'px', 'height:' + size + 'px',
+            'top:' + ((yPx / heroRect.height) * 100) + '%',
+            'left:' + ((xPx / heroRect.width) * 100) + '%',
+            '--duration:' + (Math.random() * 4 + 3) + 's',
+            '--delay:' + (Math.random() * 6) + 's',
+            '--max-opacity:' + (Math.random() * 0.6 + 0.2),
+        ].join(';');
+        container.appendChild(star);
+        placed++;
+    }
+})();
+</script>
+
+</body>
+</html>
