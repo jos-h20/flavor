@@ -19,11 +19,11 @@
 $post_id      = get_the_ID();
 $tagline_1    = carbon_get_post_meta($post_id, 'home_hero_tagline_1') ?: 'Privacy First';
 $tagline_2    = carbon_get_post_meta($post_id, 'home_hero_tagline_2') ?: 'Simple by Design';
-$tagline_3    = carbon_get_post_meta($post_id, 'home_hero_tagline_3') ?: 'Built with AI';
-$headline     = carbon_get_post_meta($post_id, 'home_hero_headline') ?: 'Software that does exactly what you need — <em>nothing more.</em>';
-$sub          = carbon_get_post_meta($post_id, 'home_hero_sub') ?: 'We build apps grounded in simplicity and privacy, using the best AI tools available.';
+$tagline_3    = carbon_get_post_meta($post_id, 'home_hero_tagline_3') ?: 'Intelligently Crafted';
+$headline     = carbon_get_post_meta($post_id, 'home_hero_headline') ?: 'Complexity, Distilled';
+$sub          = carbon_get_post_meta($post_id, 'home_hero_sub') ?: 'We use the world\'s most powerful AI to build streamlined, privacy-focused software that stays out of your way and gets the job done.';
 $cta1_url     = carbon_get_post_meta($post_id, 'home_hero_cta_primary_url') ?: '#';
-$cta1_title   = carbon_get_post_meta($post_id, 'home_hero_cta_primary_title') ?: 'Our Apps';
+$cta1_title   = carbon_get_post_meta($post_id, 'home_hero_cta_primary_title') ?: 'View Our Apps';
 $cta2_url     = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_url') ?: '#';
 $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: 'Get In Touch';
 ?>
