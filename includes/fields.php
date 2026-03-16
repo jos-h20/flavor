@@ -164,4 +164,58 @@ add_action('carbon_fields_register_fields', function () {
                 ]),
         ]);
 
+
+    // ── SyncFit: Hero ─────────────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — Hero')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('image',    'syncfit_hero_icon',         'App Icon'),
+            Field::make('text',     'syncfit_hero_heading',      'Heading'),
+            Field::make('textarea', 'syncfit_hero_subtext',      'Subtext')->set_rows(2),
+            Field::make('text',     'syncfit_hero_appstore_url', 'App Store URL'),
+        ]);
+
+    // ── SyncFit: Intraday ─────────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — Intraday')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('text',     'syncfit_intraday_heading',    'Heading'),
+            Field::make('textarea', 'syncfit_intraday_subheading', 'Subheading')->set_rows(2),
+        ]);
+
+    // ── SyncFit: Pricing ──────────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — Pricing')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('text', 'syncfit_pricing_appstore_url', 'App Store URL (Pro CTA)'),
+        ]);
+
+    // ── SyncFit: Metrics ──────────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — Metrics')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('text', 'syncfit_metrics_heading', 'Heading'),
+        ]);
+
+    // ── SyncFit: How It Works ─────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — How It Works')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('text', 'syncfit_hiw_heading', 'Heading'),
+        ]);
+
+    // ── SyncFit: Privacy ──────────────────────────────────────
+
+    Container::make('post_meta', 'SyncFit — Privacy')
+        ->where('post_template', '=', 'templates/page-syncfit.php')
+        ->add_fields([
+            Field::make('text',     'syncfit_privacy_heading', 'Heading'),
+            Field::make('textarea', 'syncfit_privacy_body',    'Body')->set_rows(3),
+        ]);
+
 });

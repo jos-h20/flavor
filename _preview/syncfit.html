@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncFit — Preview</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #1c1c1e;
+            --surface-2: #262626;
+            --accent: #0a84ff;
+            --accent-dim: rgba(10, 132, 255, 0.15);
+            --success: #30d158;
+            --success-dim: rgba(48, 209, 88, 0.15);
+            --warning: #ff9f0a;
+            --warning-dim: rgba(255, 159, 10, 0.15);
+            --error: #ff453a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --divider: rgba(255, 255, 255, 0.08);
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 12px;
+            --space-lg: 16px;
+            --space-xl: 24px;
+            --space-xxl: 32px;
+            --space-xxxl: 48px;
+            --sf-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+            --sf-max-width: 1100px;
+        }
+        body {
+            margin: 0;
+            background: var(--bg);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    padding: 100px var(--space-xl) 80px;
+    text-align: center;
+    font-family: var(--sf-font);
+}
+.syncfit-hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+.syncfit-hero__blob--1 {
+    width: 500px; height: 500px;
+    background: rgba(10, 132, 255, 0.18);
+    top: -120px; left: -100px;
+}
+.syncfit-hero__blob--2 {
+    width: 400px; height: 400px;
+    background: rgba(10, 132, 255, 0.12);
+    bottom: -80px; right: -80px;
+}
+.syncfit-hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+}
+.syncfit-hero__icon {
+    width: 90px; height: 90px;
+    border-radius: 22.37%;
+    margin: 0 auto var(--space-xl);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0s;
+}
+.syncfit-hero__app-name {
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    opacity: 0; transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.08s;
+}
+.syncfit-hero__heading {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700; color: var(--text-primary);
+    line-height: 1.15; letter-spacing: -0.02em;
+    margin: 0 0 var(--space-xl);
+    opacity: 0; transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.16s;
+}
+.syncfit-hero__subtext {
+    font-size: 20px; color: var(--text-secondary);
+    line-height: 1.6; margin: 0 0 var(--space-xxl);
+    opacity: 0; transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.24s;
+}
+.syncfit-hero__badge-wrap {
+    display: flex; justify-content: center;
+    margin-bottom: var(--space-lg);
+    opacity: 0; transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.32s;
+}
+.syncfit-hero__badge { display: inline-block; height: 52px; }
+.syncfit-hero__pricing {
+    font-size: 14px; color: var(--text-secondary);
+    opacity: 0; transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.4s;
+}
+@keyframes sf-fadein {
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (min-width: 768px) {
+    .syncfit-hero { padding: 120px var(--space-xxl) 100px; }
+}
+</style>
+
+<section class="syncfit-hero" data-section="syncfit-hero">
+    <div class="syncfit-hero__blob syncfit-hero__blob--1" aria-hidden="true"></div>
+    <div class="syncfit-hero__blob syncfit-hero__blob--2" aria-hidden="true"></div>
+    <div class="syncfit-hero__content">
+        <div class="syncfit-hero__icon">
+            <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="54" height="54" rx="12" fill="#1c1c1e"/>
+                <path d="M13 27h5l4-10 6 20 4-14 3 7 4-3h6" stroke="#0a84ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <p class="syncfit-hero__app-name">SyncFit</p>
+        <h1 class="syncfit-hero__heading">Bridge Your Fitbit Data to Apple Health</h1>
+        <p class="syncfit-hero__subtext">SyncFit syncs your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.</p>
+        <div class="syncfit-hero__badge-wrap">
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Download SyncFit on the App Store">
+                <svg class="syncfit-hero__badge" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-label="Download on the App Store">
+                    <rect width="120" height="40" rx="8" fill="#000" stroke="#fff" stroke-width="1"/>
+                    <text x="60" y="16" fill="#fff" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle">Download on the</text>
+                    <text x="60" y="29" fill="#fff" font-family="system-ui,sans-serif" font-size="13" font-weight="bold" text-anchor="middle">App Store</text>
+                </svg>
+            </a>
+        </div>
+        <p class="syncfit-hero__pricing">7-day free trial &middot; $2.99/mo after &middot; History Pack $4.99 one-time</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     INTRADAY
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-intraday {
+    background: var(--bg);
+    padding: 80px var(--space-xl);
+    font-family: var(--sf-font);
+}
+.syncfit-intraday__header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-xxxl);
+}
+.syncfit-intraday__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin: 0 0 var(--space-lg);
+}
+.syncfit-intraday__subheading {
+    font-size: 17px; color: var(--text-secondary);
+    line-height: 1.6; margin: 0;
+}
+.syncfit-intraday__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    max-width: var(--sf-max-width);
+    margin: 0 auto;
+}
+.syncfit-intraday__card {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: var(--space-xxl);
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s ease;
+}
+.syncfit-intraday__card.is-visible { opacity: 1; transform: translateY(0); }
+.syncfit-intraday__card:hover { border-color: rgba(10, 132, 255, 0.3); }
+.syncfit-intraday__card-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: var(--space-lg); line-height: 1;
+}
+.syncfit-intraday__card-name {
+    font-size: 17px; font-weight: 600; color: var(--text-primary);
+    margin: 0 0 var(--space-sm);
+}
+.syncfit-intraday__card-description {
+    font-size: 15px; color: var(--text-secondary);
+    line-height: 1.55; margin: 0;
+}
+@media (min-width: 640px) { .syncfit-intraday__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) {
+    .syncfit-intraday { padding: 100px var(--space-xxl); }
+    .syncfit-intraday__grid { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+
+<section class="syncfit-intraday" data-section="syncfit-intraday">
+    <div class="syncfit-intraday__header">
+        <h2 class="syncfit-intraday__heading">Intraday Data, Done Right</h2>
+        <p class="syncfit-intraday__subheading">SyncFit pulls minute-by-minute data from Fitbit's API — the same detail your Fitbit app shows you — and writes it to Apple Health in the correct format.</p>
+    </div>
+    <div class="syncfit-intraday__grid">
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">👣</div>
+            <h3 class="syncfit-intraday__card-name">Steps</h3>
+            <p class="syncfit-intraday__card-description">Minute-level step counts synced throughout the day, not just daily totals.</p>
+        </div>
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">❤️</div>
+            <h3 class="syncfit-intraday__card-name">Heart Rate</h3>
+            <p class="syncfit-intraday__card-description">Continuous BPM readings captured every few seconds and written to Apple Health.</p>
+        </div>
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">🩸</div>
+            <h3 class="syncfit-intraday__card-name">Blood Oxygen (SpO2)</h3>
+            <p class="syncfit-intraday__card-description">SpO2 measurements from overnight tracking and on-demand readings.</p>
+        </div>
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">🔥</div>
+            <h3 class="syncfit-intraday__card-name">Active Energy</h3>
+            <p class="syncfit-intraday__card-description">Active calorie burn segmented by time of day, not a single end-of-day estimate.</p>
+        </div>
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">📍</div>
+            <h3 class="syncfit-intraday__card-name">Distance</h3>
+            <p class="syncfit-intraday__card-description">Intraday distance in kilometers or miles, perfectly matched to your step intervals.</p>
+        </div>
+        <div class="syncfit-intraday__card">
+            <div class="syncfit-intraday__card-icon" aria-hidden="true">🏢</div>
+            <h3 class="syncfit-intraday__card-name">Flights Climbed</h3>
+            <p class="syncfit-intraday__card-description">Floor-level elevation data pulled from Fitbit and mapped to Apple Health floors.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PRICING
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-pricing {
+    background: var(--bg);
+    padding: 80px var(--space-xl);
+    font-family: var(--sf-font);
+}
+.syncfit-pricing__header { text-align: center; margin-bottom: var(--space-xxxl); }
+.syncfit-pricing__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin: 0;
+}
+.syncfit-pricing__grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--space-lg); max-width: 800px; margin: 0 auto;
+}
+.syncfit-pricing__card {
+    background: var(--surface); border: 1px solid var(--divider);
+    border-radius: 20px; padding: var(--space-xxl); position: relative; overflow: hidden;
+}
+.syncfit-pricing__card--pro { border-left: 3px solid var(--accent); }
+.syncfit-pricing__badge {
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: 99px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: var(--space-lg);
+}
+.syncfit-pricing__badge--pro { background: var(--accent-dim); color: var(--accent); }
+.syncfit-pricing__badge--history { background: var(--warning-dim); color: var(--warning); }
+.syncfit-pricing__plan-name {
+    font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 0 0 var(--space-sm);
+}
+.syncfit-pricing__price {
+    font-size: 36px; font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin: 0 0 var(--space-xs); line-height: 1;
+}
+.syncfit-pricing__price-detail {
+    font-size: 14px; color: var(--text-tertiary); margin: 0 0 var(--space-xxl);
+}
+.syncfit-pricing__divider { height: 1px; background: var(--divider); margin-bottom: var(--space-xxl); }
+.syncfit-pricing__features {
+    list-style: none; margin: 0 0 var(--space-xxl); padding: 0;
+    display: flex; flex-direction: column; gap: var(--space-md);
+}
+.syncfit-pricing__feature {
+    display: flex; align-items: flex-start; gap: var(--space-md);
+    font-size: 15px; color: var(--text-secondary); line-height: 1.4;
+}
+.syncfit-pricing__feature-check { color: var(--success); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.syncfit-pricing__cta {
+    display: block; width: 100%; padding: 14px var(--space-xl);
+    border-radius: 12px; font-size: 17px; font-weight: 600;
+    font-family: var(--sf-font); text-align: center; text-decoration: none;
+    cursor: pointer; border: none; transition: opacity 0.2s ease, transform 0.1s ease;
+    box-sizing: border-box;
+}
+.syncfit-pricing__cta:hover { opacity: 0.85; }
+.syncfit-pricing__cta:active { transform: scale(0.98); }
+.syncfit-pricing__cta--primary { background: var(--accent); color: #ffffff; }
+.syncfit-pricing__cta--secondary { background: var(--surface-2); color: var(--text-primary); border: 1px solid var(--divider); }
+.syncfit-pricing__note { font-size: 13px; color: var(--text-tertiary); text-align: center; margin-top: var(--space-md); }
+@media (min-width: 768px) {
+    .syncfit-pricing { padding: 100px var(--space-xxl); }
+    .syncfit-pricing__grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<section class="syncfit-pricing" data-section="syncfit-pricing">
+    <div class="syncfit-pricing__header">
+        <h2 class="syncfit-pricing__heading">Simple, Transparent Pricing</h2>
+    </div>
+    <div class="syncfit-pricing__grid">
+        <div class="syncfit-pricing__card syncfit-pricing__card--pro">
+            <span class="syncfit-pricing__badge syncfit-pricing__badge--pro">Pro</span>
+            <h3 class="syncfit-pricing__plan-name">SyncFit Pro</h3>
+            <p class="syncfit-pricing__price">$2.99<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary)">/mo</span></p>
+            <p class="syncfit-pricing__price-detail">7-day free trial included</p>
+            <div class="syncfit-pricing__divider"></div>
+            <ul class="syncfit-pricing__features">
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Automatic background sync — runs daily without opening the app</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Intraday data: steps, heart rate, SpO2, active energy, distance, floors</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>25 health metrics written to Apple Health</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Sleep stages, workouts, and nutrition data</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Cancel anytime — no commitment</span></li>
+            </ul>
+            <a href="#" class="syncfit-pricing__cta syncfit-pricing__cta--primary" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+        </div>
+        <div class="syncfit-pricing__card">
+            <span class="syncfit-pricing__badge syncfit-pricing__badge--history">Add-on</span>
+            <h3 class="syncfit-pricing__plan-name">History Pack</h3>
+            <p class="syncfit-pricing__price">$4.99<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary)"> one-time</span></p>
+            <p class="syncfit-pricing__price-detail">Unlock your full Fitbit history</p>
+            <div class="syncfit-pricing__divider"></div>
+            <ul class="syncfit-pricing__features">
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Backfill up to 1 year of historical Fitbit data</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>All 25 metrics synced historically, not just recent data</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>One-time purchase — yours forever, no subscription</span></li>
+                <li class="syncfit-pricing__feature"><span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span><span>Populates trends in Apple Health, Fitness, and third-party apps</span></li>
+            </ul>
+            <a href="#" class="syncfit-pricing__cta syncfit-pricing__cta--secondary" target="_blank" rel="noopener noreferrer">Get History Pack</a>
+            <p class="syncfit-pricing__note">Requires active Pro subscription</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     METRICS
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-metrics {
+    background: var(--bg);
+    padding: 80px var(--space-xl);
+    font-family: var(--sf-font);
+}
+.syncfit-metrics__header { text-align: center; margin-bottom: var(--space-xxxl); }
+.syncfit-metrics__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin: 0;
+}
+.syncfit-metrics__grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--space-lg); max-width: var(--sf-max-width); margin: 0 auto;
+}
+.syncfit-metrics__category {
+    background: var(--surface); border: 1px solid var(--divider);
+    border-radius: 16px; padding: var(--space-xxl);
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.syncfit-metrics__category.is-visible { opacity: 1; transform: translateY(0); }
+.syncfit-metrics__category-header {
+    display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl);
+}
+.syncfit-metrics__category-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--accent-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+}
+.syncfit-metrics__category-name { font-size: 20px; font-weight: 600; color: var(--text-primary); margin: 0; }
+.syncfit-metrics__metric-list { list-style: none; margin: 0; padding: 0; }
+.syncfit-metrics__metric {
+    display: flex; align-items: center; gap: var(--space-md);
+    padding: var(--space-md) 0; font-size: 15px; color: var(--text-secondary);
+}
+.syncfit-metrics__metric:not(:last-child) { border-bottom: 1px solid var(--divider); }
+.syncfit-metrics__metric-icon {
+    width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+}
+.syncfit-metrics__metric-name { color: var(--text-secondary); line-height: 1.3; }
+@media (min-width: 768px) {
+    .syncfit-metrics { padding: 100px var(--space-xxl); }
+    .syncfit-metrics__grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<section class="syncfit-metrics" data-section="syncfit-metrics">
+    <div class="syncfit-metrics__header">
+        <h2 class="syncfit-metrics__heading">25 Health Metrics Supported</h2>
+    </div>
+    <div class="syncfit-metrics__grid">
+        <!-- Activity -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">🏃</div>
+                <h3 class="syncfit-metrics__category-name">Activity</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">👣</div><span class="syncfit-metrics__metric-name">Steps</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">📍</div><span class="syncfit-metrics__metric-name">Distance</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🏢</div><span class="syncfit-metrics__metric-name">Flights Climbed</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">⏱️</div><span class="syncfit-metrics__metric-name">Active Minutes</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🚶</div><span class="syncfit-metrics__metric-name">Sedentary Minutes</span></li>
+            </ul>
+        </div>
+        <!-- Energy -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">🔥</div>
+                <h3 class="syncfit-metrics__category-name">Energy</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">⚡</div><span class="syncfit-metrics__metric-name">Active Energy Burned</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🍽️</div><span class="syncfit-metrics__metric-name">Resting Energy (BMR)</span></li>
+            </ul>
+        </div>
+        <!-- Vitals -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">❤️</div>
+                <h3 class="syncfit-metrics__category-name">Vitals</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">❤️</div><span class="syncfit-metrics__metric-name">Heart Rate (Intraday)</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">💙</div><span class="syncfit-metrics__metric-name">Resting Heart Rate</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🩸</div><span class="syncfit-metrics__metric-name">Blood Oxygen (SpO2)</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🫁</div><span class="syncfit-metrics__metric-name">Breathing Rate</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">💓</div><span class="syncfit-metrics__metric-name">Heart Rate Variability (HRV)</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🌡️</div><span class="syncfit-metrics__metric-name">Skin Temperature</span></li>
+            </ul>
+        </div>
+        <!-- Workouts -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">💪</div>
+                <h3 class="syncfit-metrics__category-name">Workouts</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🏋️</div><span class="syncfit-metrics__metric-name">Workout Sessions</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">⏰</div><span class="syncfit-metrics__metric-name">Workout Duration</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🔥</div><span class="syncfit-metrics__metric-name">Workout Calories</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">📏</div><span class="syncfit-metrics__metric-name">Workout Distance</span></li>
+            </ul>
+        </div>
+        <!-- Sleep -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">😴</div>
+                <h3 class="syncfit-metrics__category-name">Sleep</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🌙</div><span class="syncfit-metrics__metric-name">Time Asleep</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">💤</div><span class="syncfit-metrics__metric-name">Sleep Stages (REM, Light, Deep)</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🛌</div><span class="syncfit-metrics__metric-name">Time in Bed</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">⭐</div><span class="syncfit-metrics__metric-name">Sleep Score</span></li>
+            </ul>
+        </div>
+        <!-- Nutrition & Body -->
+        <div class="syncfit-metrics__category">
+            <div class="syncfit-metrics__category-header">
+                <div class="syncfit-metrics__category-icon" aria-hidden="true">🥗</div>
+                <h3 class="syncfit-metrics__category-name">Nutrition &amp; Body</h3>
+            </div>
+            <ul class="syncfit-metrics__metric-list">
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">💧</div><span class="syncfit-metrics__metric-name">Water Intake</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">🍎</div><span class="syncfit-metrics__metric-name">Calories Consumed</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">⚖️</div><span class="syncfit-metrics__metric-name">Body Weight</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">📊</div><span class="syncfit-metrics__metric-name">Body Fat Percentage</span></li>
+                <li class="syncfit-metrics__metric"><div class="syncfit-metrics__metric-icon" aria-hidden="true">📐</div><span class="syncfit-metrics__metric-name">BMI</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-hiw {
+    background: var(--bg);
+    padding: 80px var(--space-xl);
+    font-family: var(--sf-font);
+}
+.syncfit-hiw__header { text-align: center; margin-bottom: var(--space-xxxl); }
+.syncfit-hiw__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin: 0;
+}
+.syncfit-hiw__steps {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--space-xxl); max-width: var(--sf-max-width); margin: 0 auto; position: relative;
+}
+.syncfit-hiw__step { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-lg); }
+.syncfit-hiw__step-number {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: #ffffff;
+    font-size: 17px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.syncfit-hiw__step-title { font-size: 17px; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-sm); }
+.syncfit-hiw__step-description { font-size: 15px; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+@media (min-width: 768px) {
+    .syncfit-hiw { padding: 100px var(--space-xxl); }
+    .syncfit-hiw__steps { grid-template-columns: repeat(4, 1fr); gap: 0; align-items: start; }
+    .syncfit-hiw__step { flex-direction: column; align-items: center; text-align: center; padding: 0 var(--space-lg); position: relative; }
+    .syncfit-hiw__step:not(:last-child)::after {
+        content: ''; position: absolute;
+        top: 20px; left: calc(50% + 24px); right: calc(-50% + 24px);
+        height: 1px; background: var(--divider);
+    }
+}
+</style>
+
+<section class="syncfit-hiw" data-section="syncfit-hiw">
+    <div class="syncfit-hiw__header">
+        <h2 class="syncfit-hiw__heading">Up and Running in Minutes</h2>
+    </div>
+    <div class="syncfit-hiw__steps">
+        <div class="syncfit-hiw__step">
+            <div class="syncfit-hiw__step-number" aria-hidden="true">1</div>
+            <div class="syncfit-hiw__step-content">
+                <h3 class="syncfit-hiw__step-title">Download SyncFit</h3>
+                <p class="syncfit-hiw__step-description">Get SyncFit from the App Store and start your 7-day free trial.</p>
+            </div>
+        </div>
+        <div class="syncfit-hiw__step">
+            <div class="syncfit-hiw__step-number" aria-hidden="true">2</div>
+            <div class="syncfit-hiw__step-content">
+                <h3 class="syncfit-hiw__step-title">Connect Fitbit</h3>
+                <p class="syncfit-hiw__step-description">Sign in with your Fitbit account. SyncFit will request read access to your health data.</p>
+            </div>
+        </div>
+        <div class="syncfit-hiw__step">
+            <div class="syncfit-hiw__step-number" aria-hidden="true">3</div>
+            <div class="syncfit-hiw__step-content">
+                <h3 class="syncfit-hiw__step-title">Grant Apple Health Access</h3>
+                <p class="syncfit-hiw__step-description">Choose which metrics SyncFit can write to Apple Health. You stay in full control.</p>
+            </div>
+        </div>
+        <div class="syncfit-hiw__step">
+            <div class="syncfit-hiw__step-number" aria-hidden="true">4</div>
+            <div class="syncfit-hiw__step-content">
+                <h3 class="syncfit-hiw__step-title">Sync Starts Automatically</h3>
+                <p class="syncfit-hiw__step-description">SyncFit syncs in the background daily. Your data appears in Apple Health and any connected app.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PRIVACY
+═══════════════════════════════════════════════════════════ -->
+<style>
+.syncfit-privacy {
+    background: var(--bg);
+    padding: 80px var(--space-xl);
+    font-family: var(--sf-font);
+}
+.syncfit-privacy__card {
+    max-width: 700px; margin: 0 auto;
+    background: var(--surface); border: 1px solid var(--divider);
+    border-radius: 20px; padding: var(--space-xxxl) var(--space-xxl); text-align: center;
+}
+.syncfit-privacy__icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--success-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin: 0 auto var(--space-xl); line-height: 1;
+}
+.syncfit-privacy__heading { font-size: 22px; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-lg); letter-spacing: -0.01em; }
+.syncfit-privacy__body { font-size: 16px; color: var(--text-secondary); line-height: 1.65; margin: 0 0 var(--space-xxl); }
+.syncfit-privacy__chip {
+    display: inline-flex; align-items: center; gap: var(--space-sm);
+    padding: 6px 14px; border-radius: 99px;
+    background: var(--success-dim); color: var(--success);
+    font-size: 13px; font-weight: 600;
+}
+@media (min-width: 768px) {
+    .syncfit-privacy { padding: 100px var(--space-xxl); }
+    .syncfit-privacy__card { padding: var(--space-xxxl) 56px; }
+}
+</style>
+
+<section class="syncfit-privacy" data-section="syncfit-privacy">
+    <div class="syncfit-privacy__card">
+        <div class="syncfit-privacy__icon" aria-hidden="true">🔒</div>
+        <h2 class="syncfit-privacy__heading">Your Data Stays Yours</h2>
+        <p class="syncfit-privacy__body">SyncFit connects directly to Fitbit's official API using OAuth. Your Fitbit credentials are never stored by SyncFit — authentication is handled entirely by Fitbit. Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.</p>
+        <span class="syncfit-privacy__chip">
+            <span aria-hidden="true">✓</span>
+            Requires Fitbit account &amp; Apple Health access
+        </span>
+    </div>
+</section>
+
+<!-- ─── IntersectionObserver for scroll animations ─────────── -->
+<script>
+(function() {
+    // Intraday cards
+    const intradaySection = document.querySelector('[data-section="syncfit-intraday"]');
+    if (intradaySection) {
+        const cards = intradaySection.querySelectorAll('.syncfit-intraday__card');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target);
+                    entry.target.style.transitionDelay = (idx * 60) + 'ms';
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        cards.forEach(c => obs.observe(c));
+    }
+
+    // Metrics categories
+    const metricsSection = document.querySelector('[data-section="syncfit-metrics"]');
+    if (metricsSection) {
+        const cats = metricsSection.querySelectorAll('.syncfit-metrics__category');
+        const obs2 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cats).indexOf(entry.target);
+                    entry.target.style.transitionDelay = (idx * 60) + 'ms';
+                    entry.target.classList.add('is-visible');
+                    obs2.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        cats.forEach(c => obs2.observe(c));
+    }
+})();
+</script>
+
+</body>
+</html>
