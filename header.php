@@ -64,15 +64,19 @@
     color: var(--color-white);
     text-decoration: none;
     font-family: var(--font-body);
-    font-weight: 200;
+    font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     transition: color var(--transition-base);
 }
 
-.site-header__nav a:hover,
-.site-header__nav .current-menu-item a {
+.site-header__nav a:hover {
+    color: var(--color-white);
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+}
+
+.site-header__nav .current-menu-item > a {
     color: var(--color-slate-light);
 }
 
@@ -88,6 +92,99 @@
 .site-header__toggle svg {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+/* ── Mega panel navigation ────────────────────────────────── */
+
+/* Chevron on top-level parent items only */
+.site-header__nav > ul > .menu-item-has-children > a::after {
+    content: '';
+    display: inline-block;
+    margin-left: 0.35em;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-0.15em) rotate(45deg);
+    transition: transform var(--transition-fast);
+    vertical-align: middle;
+}
+
+.site-header__nav li {
+    position: relative;
+}
+
+/* All sub-menus hidden by default */
+.site-header__nav .sub-menu {
+    display: none;
+    position: absolute;
+    min-width: 220px;
+    background-color: var(--color-navy-mid);
+    border: 1px solid rgba(74, 127, 165, 0.2);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    list-style: none;
+    z-index: 200;
+}
+
+/* Panel drops below, centered under the parent nav item */
+.site-header__nav > ul > li > .sub-menu {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: calc(var(--spacing-md) + 0.75rem);
+}
+
+/* Show panel on hover / keyboard focus */
+.site-header__nav li:hover > .sub-menu,
+.site-header__nav li:focus-within > .sub-menu {
+    display: block;
+}
+
+/* Level-2 items */
+.site-header__nav > ul > li > .sub-menu > li > a {
+    display: block;
+    padding: 0.3rem 0;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--color-white);
+    white-space: nowrap;
+}
+
+.site-header__nav > ul > li > .sub-menu > li > a:hover {
+    color: var(--color-white);
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+    background: none;
+}
+
+/* Level-3 sub-menu: always visible inside the panel */
+.site-header__nav .sub-menu .sub-menu {
+    display: block;
+    position: static;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    min-width: 0;
+    z-index: auto;
+}
+
+/* Level-3 links — indented to show hierarchy */
+.site-header__nav .sub-menu .sub-menu a {
+    display: block;
+    padding: 0.3rem 0 0.3rem var(--spacing-md);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--color-white-dim);
+    white-space: nowrap;
+}
+
+.site-header__nav .sub-menu .sub-menu a:hover,
+.site-header__nav .sub-menu .sub-menu .current-menu-item > a {
+    color: var(--color-white);
+    text-shadow: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
+    background: none;
 }
 
 @media (max-width: 767px) {
@@ -118,6 +215,30 @@
     .site-header__toggle {
         display: block;
     }
+
+    .site-header__nav .sub-menu {
+        display: block;
+        position: static;
+        background: none;
+        border: none;
+        border-left: 1px solid rgba(74, 127, 165, 0.3);
+        border-radius: 0;
+        padding: 0;
+        margin-top: var(--spacing-sm);
+        margin-left: var(--spacing-md);
+    }
+
+    .site-header__nav .sub-menu a {
+        padding: 0.35rem 0;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        color: var(--color-white-dim);
+    }
+
+    .site-header__nav .menu-item-has-children > a::after {
+        display: none;
+    }
+
 }
 </style>
 
@@ -153,7 +274,7 @@
                 echo '<li><a href="#">Contact</a></li>';
                 echo '</ul>';
             },
-            'depth'          => 1,
+            'depth'          => 0,
         ]);
         ?>
     </nav>
