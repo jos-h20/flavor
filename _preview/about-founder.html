@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Founder — Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.about-founder {
+    background-color: var(--color-bg);
+    padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+.about-founder__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.about-founder__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .about-founder__inner {
+        grid-template-columns: 300px 1fr;
+        gap: var(--spacing-3xl);
+    }
+}
+
+@media (min-width: 1024px) {
+    .about-founder__inner {
+        grid-template-columns: 380px 1fr;
+    }
+}
+
+.about-founder__photo-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-founder__photo-placeholder svg {
+    width: 64px;
+    height: 64px;
+    opacity: 0.2;
+    color: var(--color-navy-deep);
+}
+
+.about-founder__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--color-navy-deep);
+    margin-bottom: var(--spacing-xs);
+}
+
+.about-founder__title {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+    margin-bottom: 0;
+}
+
+.about-founder__divider {
+    width: 36px;
+    height: 1px;
+    background: var(--color-km-brown);
+    margin: var(--spacing-lg) 0;
+    opacity: 0.45;
+}
+
+.about-founder__bio {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.85;
+}
+
+.about-founder__bio p { margin-bottom: var(--spacing-md); }
+.about-founder__bio p:last-child { margin-bottom: 0; }
+
+.about-founder__bio a {
+    color: var(--color-km-blue);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+}
+
+.about-founder__bio a:hover { color: var(--color-navy-deep); }
+</style>
+
+<section class="about-founder" data-section="about-founder">
+    <div class="about-founder__container">
+        <div class="about-founder__inner">
+
+            <div class="about-founder__photo-wrap">
+                <div class="about-founder__photo-placeholder" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="about-founder__bio-wrap">
+                <h2 class="about-founder__name">Josh Overly</h2>
+                <p class="about-founder__title">Founder &amp; Developer</p>
+                <div class="about-founder__divider" aria-hidden="true"></div>
+                <div class="about-founder__bio">
+                    <p>I've been writing code since I was a teenager. What started as a hobby became a craft, and the craft became a business when I got tired of watching software get built badly.</p>
+                    <p>Kanso Media is deliberately small. I work with a handful of clients at a time, which means your project gets my full attention — not a project manager as a go-between, not a junior dev on the hard parts. The person you talk to is the person who builds it.</p>
+                    <p>The name comes from a Japanese design philosophy: the idea that beauty emerges from removing everything that isn't essential. It turns out to be a useful principle for software.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

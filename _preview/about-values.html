@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Values — Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.about-values {
+    background-color: var(--color-bg-alt);
+    padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+.about-values__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.about-values__header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.about-values__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--color-navy-deep);
+}
+
+.about-values__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .about-values__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .about-values__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.about-values__card {
+    background: var(--color-bg);
+    border-left: 3px solid var(--color-km-blue);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: box-shadow var(--transition-base);
+}
+
+.about-values__card:nth-child(3n+2) { border-left-color: var(--color-km-brown); }
+.about-values__card:nth-child(3n+3) { border-left-color: var(--color-km-green); }
+
+.about-values__card:hover { box-shadow: var(--shadow-md); }
+
+.about-values__card-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--color-navy-deep);
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-values__card-description {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+</style>
+
+<section class="about-values" data-section="about-values">
+    <div class="about-values__container">
+
+        <header class="about-values__header">
+            <h2 class="about-values__heading">What I stand for</h2>
+        </header>
+
+        <ul class="about-values__grid">
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Simplicity</h3>
+                <p class="about-values__card-description">Not minimal for aesthetic reasons. Minimal because every unnecessary feature is a cost your users pay.</p>
+            </li>
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Privacy</h3>
+                <p class="about-values__card-description">Your users didn't agree to be the product. I build as if their data is none of my business — because it isn't.</p>
+            </li>
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Craft</h3>
+                <p class="about-values__card-description">The part you can't see is usually what matters most. Good architecture doesn't announce itself.</p>
+            </li>
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Honesty</h3>
+                <p class="about-values__card-description">If something's going to take longer, I'll tell you before it does. If your idea has a flaw, I'll say that too.</p>
+            </li>
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Ownership</h3>
+                <p class="about-values__card-description">You own everything we build together — code, IP, all of it. No lock-in, no licensing surprises, no strings.</p>
+            </li>
+            <li class="about-values__card">
+                <h3 class="about-values__card-title">Restraint</h3>
+                <p class="about-values__card-description">Adding features is easy. Knowing which ones not to build is the skill that separates good software from great software.</p>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+</body>
+</html>

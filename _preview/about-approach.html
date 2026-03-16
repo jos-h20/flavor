@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Approach — Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.about-approach {
+    background: linear-gradient(180deg, #0e1c30 0%, var(--color-navy-deep) 100%);
+    padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+.about-approach__container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.about-approach__header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.about-approach__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--color-white);
+}
+
+.about-approach__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.about-approach__step {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.about-approach__step-number {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-slate-light);
+    line-height: 1;
+    text-align: right;
+    opacity: 0.45;
+    padding-top: 0.1rem;
+}
+
+.about-approach__step-body {
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(232, 240, 248, 0.1);
+}
+
+.about-approach__step-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-approach__step-description {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--color-white-dim);
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+</style>
+
+<section class="about-approach" data-section="about-approach">
+    <div class="about-approach__container">
+
+        <header class="about-approach__header">
+            <h2 class="about-approach__heading">How a project actually works</h2>
+        </header>
+
+        <ol class="about-approach__steps">
+            <li class="about-approach__step">
+                <span class="about-approach__step-number" aria-hidden="true">01</span>
+                <div class="about-approach__step-body">
+                    <h3 class="about-approach__step-title">Discovery</h3>
+                    <p class="about-approach__step-description">We talk before I write a single line of code. I want to understand the real problem — not just the requirements document.</p>
+                </div>
+            </li>
+            <li class="about-approach__step">
+                <span class="about-approach__step-number" aria-hidden="true">02</span>
+                <div class="about-approach__step-body">
+                    <h3 class="about-approach__step-title">Proposal</h3>
+                    <p class="about-approach__step-description">A clear scope, timeline, and cost. You know exactly what you're getting before we start. No vague estimates, no hidden assumptions.</p>
+                </div>
+            </li>
+            <li class="about-approach__step">
+                <span class="about-approach__step-number" aria-hidden="true">03</span>
+                <div class="about-approach__step-body">
+                    <h3 class="about-approach__step-title">Build</h3>
+                    <p class="about-approach__step-description">You see progress as it happens. Regular check-ins, working software early, and a direct line to me throughout.</p>
+                </div>
+            </li>
+            <li class="about-approach__step">
+                <span class="about-approach__step-number" aria-hidden="true">04</span>
+                <div class="about-approach__step-body">
+                    <h3 class="about-approach__step-title">Launch</h3>
+                    <p class="about-approach__step-description">Careful deployment, thorough testing, and a handover that makes sense. I'm still available after go-live, not just before it.</p>
+                </div>
+            </li>
+            <li class="about-approach__step">
+                <span class="about-approach__step-number" aria-hidden="true">05</span>
+                <div class="about-approach__step-body">
+                    <h3 class="about-approach__step-title">After</h3>
+                    <p class="about-approach__step-description">Bugs get fixed. Questions get answered. If something needs to change six months from now, I'm a message away.</p>
+                </div>
+            </li>
+        </ol>
+
+    </div>
+</section>
+
+</body>
+</html>
