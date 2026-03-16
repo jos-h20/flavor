@@ -110,4 +110,25 @@ add_action('carbon_fields_register_fields', function () {
                 ->set_options(['_self' => 'Same Window', '_blank' => 'New Tab']),
         ]);
 
+    // ── Contact: Hero ─────────────────────────────────────────
+
+    Container::make('post_meta', 'Contact — Hero')
+        ->where('post_template', '=', 'templates/page-contact.php')
+        ->add_fields([
+            Field::make('text',     'contact_hero_heading',    'Heading'),
+            Field::make('textarea', 'contact_hero_subheading', 'Subheading')
+                ->set_rows(2),
+        ]);
+
+    // ── Contact: Form ─────────────────────────────────────────
+
+    Container::make('post_meta', 'Contact — Form')
+        ->where('post_template', '=', 'templates/page-contact.php')
+        ->add_fields([
+            Field::make('text', 'contact_form_heading',   'Section Heading')
+                ->set_default_value('Send a message'),
+            Field::make('text', 'contact_form_shortcode', 'CF7 Shortcode')
+                ->set_help_text('Paste the full [contact-form-7 id="…" title="…"] shortcode here.'),
+        ]);
+
 });
