@@ -23,7 +23,7 @@ $tagline_3    = carbon_get_post_meta($post_id, 'home_hero_tagline_3') ?: 'Intell
 $headline     = carbon_get_post_meta($post_id, 'home_hero_headline') ?: 'Complexity, Distilled';
 $sub          = carbon_get_post_meta($post_id, 'home_hero_sub') ?: 'We use the world\'s most powerful AI to build streamlined, privacy-focused software that stays out of your way and gets the job done.';
 $cta1_url     = carbon_get_post_meta($post_id, 'home_hero_cta_primary_url') ?: '#';
-$cta1_title   = carbon_get_post_meta($post_id, 'home_hero_cta_primary_title') ?: 'View Our Apps';
+$cta1_title   = carbon_get_post_meta($post_id, 'home_hero_cta_primary_title') ?: 'View Our Work';
 $cta2_url     = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_url') ?: '#';
 $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: 'Get In Touch';
 ?>

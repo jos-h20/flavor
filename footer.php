@@ -54,7 +54,7 @@
         </nav>
 
         <p class="site-footer__copy">
-            &copy; <?php echo esc_html(date('Y')); ?> <?php echo esc_html(get_bloginfo('name')); ?>. All rights reserved.
+            &copy; <?php echo esc_html(date('Y')); ?> Kanso Ventures LLC dba Kanso Media. All rights reserved.
         </p>
     </div>
 </footer>

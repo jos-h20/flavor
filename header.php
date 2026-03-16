@@ -148,9 +148,8 @@
             'container'      => false,
             'fallback_cb'    => function () {
                 echo '<ul>';
-                echo '<li><a href="#">Apps</a></li>';
                 echo '<li><a href="#">About</a></li>';
-                echo '<li><a href="#">Blog</a></li>';
+                echo '<li><a href="#">Our Work</a></li>';
                 echo '<li><a href="#">Contact</a></li>';
                 echo '</ul>';
             },
