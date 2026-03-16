@@ -36,7 +36,7 @@
 
 .site-footer__copy {
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.75);
 }
 </style>
 
