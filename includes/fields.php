@@ -131,4 +131,37 @@ add_action('carbon_fields_register_fields', function () {
                 ->set_help_text('Paste the full [contact-form-7 id="…" title="…"] shortcode here.'),
         ]);
 
+    // ── Work: Hero ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Work — Hero')
+        ->where('post_template', '=', 'templates/page-work.php')
+        ->add_fields([
+            Field::make('text',     'work_hero_heading',    'Heading'),
+            Field::make('textarea', 'work_hero_subheading', 'Subheading')
+                ->set_rows(2),
+        ]);
+
+    // ── Work: Grid ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Work — Grid')
+        ->where('post_template', '=', 'templates/page-work.php')
+        ->add_fields([
+            Field::make('text', 'work_grid_heading', 'Section Heading')
+                ->set_default_value('Published work'),
+            Field::make('complex', 'work_grid_items', 'Projects')
+                ->add_fields([
+                    Field::make('text',     'title',       'Project Name'),
+                    Field::make('textarea', 'description', 'Description')
+                        ->set_rows(2),
+                    Field::make('text',     'url',         'URL'),
+                    Field::make('select',   'type',        'Type')
+                        ->set_options([
+                            'chrome-extension' => 'Chrome Extension',
+                            'web-app'          => 'Web App',
+                            'ios-app'          => 'iOS App',
+                        ]),
+                    Field::make('image',    'image',       'Screenshot / Icon'),
+                ]),
+        ]);
+
 });

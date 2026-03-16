@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Grid Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.work-grid {
+    background: var(--color-bg);
+    padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+.work-grid__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.work-grid__heading {
+    font-family: var(--font-body);
+    font-weight: 200;
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl);
+}
+
+.work-grid__items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .work-grid__items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.work-grid__card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition-base);
+}
+
+.work-grid__card:nth-child(1) { transition-delay: 0ms; }
+.work-grid__card:nth-child(2) { transition-delay: 100ms; }
+.work-grid__card:nth-child(3) { transition-delay: 200ms; }
+.work-grid__card:nth-child(4) { transition-delay: 300ms; }
+
+.work-grid.is-visible .work-grid__card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.work-grid__card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.work-grid__card-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+}
+
+.work-grid__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.work-grid__card:hover .work-grid__card-image img {
+    transform: scale(1.03);
+}
+
+
+.work-grid__card-body {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    flex: 1;
+}
+
+.work-grid__card-badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 0.2em 0.75em;
+    align-self: flex-start;
+}
+
+.work-grid__card-title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-top: var(--spacing-xs);
+}
+
+.work-grid__card-description {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+    flex: 1;
+}
+
+.work-grid__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-km-blue);
+    margin-top: var(--spacing-sm);
+    transition: gap var(--transition-fast);
+}
+
+.work-grid__card-link:hover {
+    gap: 0.6em;
+}
+
+.work-grid__card-link svg {
+    width: 0.85em;
+    height: 0.85em;
+    flex-shrink: 0;
+}
+</style>
+
+<section class="work-grid" data-section="work-grid">
+    <div class="work-grid__container">
+
+        <p class="work-grid__heading">Published work</p>
+
+        <div class="work-grid__items">
+
+            <article class="work-grid__card">
+                <div class="work-grid__card-body">
+                    <span class="work-grid__card-badge">Chrome Extension</span>
+                    <h2 class="work-grid__card-title">MT Bachelor Snow Stake Live</h2>
+                    <p class="work-grid__card-description">Live snow stake camera feed for Mt. Bachelor, right in your browser toolbar.</p>
+                    <a class="work-grid__card-link" href="https://chromewebstore.google.com/detail/mt-bachelor-snow-stake-li/pehclpbdmgfhgnfihaebdnmjpchcencc" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="work-grid__card">
+                <div class="work-grid__card-body">
+                    <span class="work-grid__card-badge">Chrome Extension</span>
+                    <h2 class="work-grid__card-title">Bitcoin Price Badge</h2>
+                    <p class="work-grid__card-description">Live Bitcoin price displayed as a badge on your browser toolbar. No accounts, no noise.</p>
+                    <a class="work-grid__card-link" href="https://chromewebstore.google.com/detail/bitcoin-price-badge/jhhmnipbopokecfpomonnlockkgkbipo" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="work-grid__card">
+                <div class="work-grid__card-body">
+                    <span class="work-grid__card-badge">Chrome Extension</span>
+                    <h2 class="work-grid__card-title">Course Video Auto Play</h2>
+                    <p class="work-grid__card-description">Automatically advances to the next lesson so you can stay in flow.</p>
+                    <a class="work-grid__card-link" href="https://chromewebstore.google.com/detail/course-video-auto-play/gakandenhanlineidcebgnpllgdnjhji" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="work-grid__card">
+                <div class="work-grid__card-body">
+                    <span class="work-grid__card-badge">Web App</span>
+                    <h2 class="work-grid__card-title">PaddleFlows</h2>
+                    <p class="work-grid__card-description">Workflow automation for Paddle-powered businesses.</p>
+                    <a class="work-grid__card-link" href="https://paddleflows.com/" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    const section = document.querySelector('[data-section="work-grid"]');
+    if (!section) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(section);
+})();
+</script>
+
+</body>
+</html>
