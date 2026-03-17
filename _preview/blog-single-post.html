@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Single Post Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.blog-single-post {
+    padding: var(--spacing-xl) var(--spacing-md) var(--spacing-2xl);
+    background-color: var(--color-bg);
+}
+
+.blog-single-post__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.blog-single-post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.blog-single-post__category {
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary-dark);
+    background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    padding: 0.2em 0.65em;
+    border-radius: var(--radius-full);
+}
+
+.blog-single-post__meta-sep { opacity: 0.35; }
+
+.blog-single-post__title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+}
+
+.blog-single-post__subtitle {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    line-height: 1.65;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.blog-single-post__image-wrapper {
+    margin: var(--spacing-lg) 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-bg-alt);
+}
+
+.blog-single-post__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-single-post__rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--color-km-brown);
+    margin: var(--spacing-md) 0 var(--spacing-lg);
+}
+
+.blog-single-post__content {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+.blog-single-post__content p { margin-bottom: 1.5em; }
+
+.blog-single-post__content h2,
+.blog-single-post__content h3,
+.blog-single-post__content h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+    color: var(--color-text);
+}
+
+.blog-single-post__content h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); }
+.blog-single-post__content h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+.blog-single-post__content a {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
+    transition: color var(--transition-fast);
+}
+
+.blog-single-post__content a:hover { color: var(--color-primary); }
+
+.blog-single-post__content blockquote {
+    margin: 2em 0;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 3px solid var(--color-km-brown);
+    background-color: var(--color-bg-alt);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
+    color: var(--color-text-light);
+}
+
+.blog-single-post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+.blog-single-post__tags-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    align-self: center;
+    margin-right: var(--spacing-xs);
+}
+
+.blog-single-post__tag {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 0.2em 0.75em;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.blog-single-post__tag:hover {
+    background-color: var(--color-navy-deep);
+    color: var(--color-white);
+    border-color: var(--color-navy-deep);
+}
+
+@media (min-width: 768px) {
+    .blog-single-post { padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-3xl); }
+}
+</style>
+
+<section class="blog-single-post" data-section="blog-single-post">
+    <article class="blog-single-post__container">
+
+        <!-- Meta bar -->
+        <div class="blog-single-post__meta">
+            <span class="blog-single-post__category">iOS</span>
+            <span class="blog-single-post__meta-sep" aria-hidden="true">·</span>
+            <time datetime="2026-02-28">Feb 28, 2026</time>
+            <span class="blog-single-post__meta-sep" aria-hidden="true">·</span>
+            <span>Josh Kanso</span>
+            <span class="blog-single-post__meta-sep" aria-hidden="true">·</span>
+            <span>6 min read</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="blog-single-post__title">Shipping SyncFit — what I learned building my first App Store app</h1>
+
+        <!-- Subtitle -->
+        <p class="blog-single-post__subtitle">The gap between a working prototype and an App Store release is wider than it looks. Here's what surprised me most along the way.</p>
+
+        <!-- Featured image -->
+        <figure class="blog-single-post__image-wrapper">
+            <img
+                class="blog-single-post__image"
+                src="https://picsum.photos/seed/blog-single/1200/675"
+                alt="SyncFit app screenshot"
+                width="1200"
+                height="675"
+                loading="lazy"
+            >
+        </figure>
+
+        <!-- Post body -->
+        <div class="blog-single-post__content">
+            <p>I've been building software professionally for over a decade, but shipping a native iOS app to the App Store was a genuinely different experience. The constraints are stricter, the feedback loops are longer, and the stakes feel oddly higher — even when you're the only person on the team.</p>
+
+            <h2>The prototype trap</h2>
+            <p>SyncFit started as a weekend experiment: could I pull workout data from Apple Health and sync it somewhere useful? The prototype worked in two hours. I figured it would take a couple of weeks to polish up and ship.</p>
+            <p>It took four months.</p>
+
+            <blockquote>
+                "The last 20% of a product takes 80% of the time. But the App Store review adds a whole extra layer of unknown."
+            </blockquote>
+
+            <h2>App Store review is its own discipline</h2>
+            <p>Apple's review process is thorough and occasionally opaque. My first submission was rejected for a metadata issue I hadn't anticipated — the description was flagged for mentioning features that weren't visually demonstrated in the screenshots.</p>
+            <p>This sent me back to redesign the screenshot set entirely, which turned out to be worthwhile. The new screenshots are clearer and convert better. But it added three weeks to the timeline.</p>
+
+            <h3>What I'd do differently</h3>
+            <p>Prepare the App Store assets — screenshots, descriptions, keywords — before you finish development, not after. They take longer than you think, and they'll reveal UX issues in your own app that you missed during testing.</p>
+        </div>
+
+        <!-- Tags -->
+        <div class="blog-single-post__tags">
+            <span class="blog-single-post__tags-label">Tags</span>
+            <a class="blog-single-post__tag" href="#">iOS</a>
+            <a class="blog-single-post__tag" href="#">App Store</a>
+            <a class="blog-single-post__tag" href="#">SyncFit</a>
+            <a class="blog-single-post__tag" href="#">Indie Dev</a>
+        </div>
+
+    </article>
+</section>
+
+</body>
+</html>

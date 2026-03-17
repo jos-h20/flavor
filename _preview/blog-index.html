@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Index Preview</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<style>
+.blog-index {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background-color: var(--color-bg);
+}
+
+.blog-index__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.blog-index__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+    .blog-index__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .blog-index__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.blog-index__card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.blog-index__card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.blog-index__card-image-link {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--color-bg-alt);
+}
+
+.blog-index__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.blog-index__card:hover .blog-index__card-image {
+    transform: scale(1.04);
+}
+
+.blog-index__card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-navy-deep) 0%, var(--color-navy-mid) 100%);
+}
+
+.blog-index__card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-sm);
+}
+
+.blog-index__card-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--color-text-light);
+}
+
+.blog-index__card-category {
+    font-weight: 500;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+}
+
+.blog-index__card-meta-sep { opacity: 0.4; }
+
+.blog-index__card-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    line-height: 1.3;
+    color: var(--color-text);
+    margin-bottom: 0;
+}
+
+.blog-index__card-title-link {
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+.blog-index__card-title-link:hover { color: var(--color-primary-dark); }
+
+.blog-index__card-excerpt {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-text-light);
+    margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-index__card-read-more {
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-primary-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.blog-index__card-read-more:hover {
+    gap: 0.55rem;
+    color: var(--color-primary);
+}
+
+.blog-index__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-2xl);
+    flex-wrap: wrap;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+}
+
+.blog-index__pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.75rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 400;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.blog-index__pagination .page-numbers:hover {
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+}
+
+.blog-index__pagination .page-numbers.current {
+    background-color: var(--color-navy-deep);
+    border-color: var(--color-navy-deep);
+    color: var(--color-white);
+    font-weight: 500;
+}
+</style>
+
+<section class="blog-index" data-section="blog-index">
+    <div class="blog-index__container">
+        <div class="blog-index__grid">
+
+            <!-- Card 1 — with image -->
+            <article class="blog-index__card">
+                <a class="blog-index__card-image-link" href="#" tabindex="-1" aria-hidden="true">
+                    <img class="blog-index__card-image" src="https://picsum.photos/seed/blog1/800/450" alt="Post thumbnail" width="800" height="450" loading="lazy">
+                </a>
+                <div class="blog-index__card-body">
+                    <div class="blog-index__card-meta">
+                        <span class="blog-index__card-category">Design</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <time>Mar 12, 2026</time>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>Josh Kanso</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>4 min read</span>
+                    </div>
+                    <h2 class="blog-index__card-title">
+                        <a class="blog-index__card-title-link" href="#">Why I stopped using design systems for solo projects</a>
+                    </h2>
+                    <p class="blog-index__card-excerpt">Design systems are brilliant for teams but they carry a hidden cost when you're working alone — the overhead of maintaining consistency across tokens, components, and documentation.</p>
+                    <a class="blog-index__card-read-more" href="#">
+                        Read more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 2 — with image -->
+            <article class="blog-index__card">
+                <a class="blog-index__card-image-link" href="#" tabindex="-1" aria-hidden="true">
+                    <img class="blog-index__card-image" src="https://picsum.photos/seed/blog2/800/450" alt="Post thumbnail" width="800" height="450" loading="lazy">
+                </a>
+                <div class="blog-index__card-body">
+                    <div class="blog-index__card-meta">
+                        <span class="blog-index__card-category">iOS</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <time>Feb 28, 2026</time>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>Josh Kanso</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>6 min read</span>
+                    </div>
+                    <h2 class="blog-index__card-title">
+                        <a class="blog-index__card-title-link" href="#">Shipping SyncFit — what I learned building my first App Store app</a>
+                    </h2>
+                    <p class="blog-index__card-excerpt">The gap between a working prototype and an App Store release is wider than it looks. Here's what surprised me most along the way.</p>
+                    <a class="blog-index__card-read-more" href="#">
+                        Read more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 3 — no image (placeholder) -->
+            <article class="blog-index__card">
+                <a class="blog-index__card-image-link" href="#" tabindex="-1" aria-hidden="true">
+                    <div class="blog-index__card-image-placeholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-white)" stroke-width="1" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                    </div>
+                </a>
+                <div class="blog-index__card-body">
+                    <div class="blog-index__card-meta">
+                        <span class="blog-index__card-category">Process</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <time>Feb 10, 2026</time>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>Josh Kanso</span>
+                        <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
+                        <span>3 min read</span>
+                    </div>
+                    <h2 class="blog-index__card-title">
+                        <a class="blog-index__card-title-link" href="#">The zero-build WordPress theme I've been quietly using for years</a>
+                    </h2>
+                    <p class="blog-index__card-excerpt">No webpack, no npm, no compilation step. Just PHP, CSS, and a refresh. This approach has quietly become my favourite way to build client sites.</p>
+                    <a class="blog-index__card-read-more" href="#">
+                        Read more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Pagination -->
+        <nav class="blog-index__pagination" aria-label="Blog pagination">
+            <a class="page-numbers" href="#">&larr;</a>
+            <a class="page-numbers" href="#">1</a>
+            <span class="page-numbers current">2</span>
+            <a class="page-numbers" href="#">3</a>
+            <a class="page-numbers" href="#">&rarr;</a>
+        </nav>
+    </div>
+</section>
+
+</body>
+</html>

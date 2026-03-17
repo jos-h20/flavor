@@ -1,0 +1,130 @@
+<?php
+/**
+ * Section: Blog Single Nav
+ * Page: Single Post (single.php)
+ * Description: Previous / next post navigation between single posts. No Carbon Fields.
+ */
+
+// ─── Data ────────────────────────────────────────────────────
+$prev = get_previous_post();
+$next = get_next_post();
+
+if (! $prev && ! $next) {
+    return;
+}
+?>
+
+<!-- ─── Styles ─────────────────────────────────────────────── -->
+<style>
+.blog-single-nav {
+    background-color: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.blog-single-nav__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.blog-single-nav__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.blog-single-nav__item--next {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.blog-single-nav__label {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.blog-single-nav__item--next .blog-single-nav__label {
+    flex-direction: row-reverse;
+}
+
+.blog-single-nav__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.3;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+    max-width: 280px;
+}
+
+.blog-single-nav__link:hover .blog-single-nav__title {
+    color: var(--color-primary-dark);
+}
+
+.blog-single-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+@media (max-width: 480px) {
+    .blog-single-nav__container {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-single-nav__item--next {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .blog-single-nav__item--next .blog-single-nav__label {
+        flex-direction: row;
+    }
+}
+</style>
+
+<!-- ─── Markup ─────────────────────────────────────────────── -->
+<nav class="blog-single-nav" data-section="blog-single-nav" aria-label="Post navigation">
+    <div class="blog-single-nav__container">
+
+        <div class="blog-single-nav__item blog-single-nav__item--prev">
+            <?php if ($prev) : ?>
+                <a class="blog-single-nav__link" href="<?php echo esc_url(get_permalink($prev->ID)); ?>">
+                    <span class="blog-single-nav__label">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+                        </svg>
+                        Previous
+                    </span>
+                    <span class="blog-single-nav__title"><?php echo esc_html(get_the_title($prev->ID)); ?></span>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <div class="blog-single-nav__item blog-single-nav__item--next">
+            <?php if ($next) : ?>
+                <a class="blog-single-nav__link" href="<?php echo esc_url(get_permalink($next->ID)); ?>">
+                    <span class="blog-single-nav__label">
+                        Next
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </span>
+                    <span class="blog-single-nav__title"><?php echo esc_html(get_the_title($next->ID)); ?></span>
+                </a>
+            <?php endif; ?>
+        </div>
+
+    </div>
+</nav>

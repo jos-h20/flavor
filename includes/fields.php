@@ -244,4 +244,27 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('textarea', 'syncfit_privacy_body',    'Body')->set_rows(3),
         ]);
 
+
+    // ── Blog: Hero ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Blog — Hero')
+        ->where('post_template', '=', 'templates/page-blog.php')
+        ->add_fields([
+            Field::make('text',     'blog_hero_heading',    'Heading')
+                ->set_default_value('From the Studio'),
+            Field::make('textarea', 'blog_hero_subheading', 'Subheading')
+                ->set_rows(2)
+                ->set_help_text('Optional deck copy shown below the heading.'),
+        ]);
+
+    // ── Blog: Single Post extras ──────────────────────────────
+
+    Container::make('post_meta', 'Blog Post')
+        ->where('post_type', '=', 'post')
+        ->add_fields([
+            Field::make('textarea', 'post_subtitle', 'Subtitle / Deck')
+                ->set_rows(2)
+                ->set_help_text('Optional subtitle shown between the post title and body. Leave blank to omit.'),
+        ]);
+
 });
