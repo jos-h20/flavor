@@ -165,6 +165,32 @@ add_action('carbon_fields_register_fields', function () {
         ]);
 
 
+    // ── Apps: Hero ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Apps — Hero')
+        ->where('post_template', '=', 'templates/page-apps.php')
+        ->add_fields([
+            Field::make('text',     'apps_hero_heading',    'Heading'),
+            Field::make('textarea', 'apps_hero_subheading', 'Subheading')
+                ->set_rows(2),
+        ]);
+
+    // ── Apps: Grid ────────────────────────────────────────────
+
+    Container::make('post_meta', 'Apps — Grid')
+        ->where('post_template', '=', 'templates/page-apps.php')
+        ->add_fields([
+            Field::make('complex', 'apps_grid_items', 'Apps')
+                ->add_fields([
+                    Field::make('image',    'icon',    'App Icon'),
+                    Field::make('text',     'name',    'App Name'),
+                    Field::make('textarea', 'tagline', 'Tagline')
+                        ->set_rows(2),
+                    Field::make('text',     'url',     'Page URL')
+                        ->set_help_text('Relative path to the app page, e.g. /syncfit'),
+                ]),
+        ]);
+
     // ── SyncFit: Hero ─────────────────────────────────────────
 
     Container::make('post_meta', 'SyncFit — Hero')
