@@ -24,7 +24,8 @@ jobs:
         with:
           # Excludes git files, node modules, and Claude's preview folder
           # --delete ensures files removed from GitHub are also removed from Asura
-          switches: -avzr --delete --exclude='.git*' --exclude='node_modules' --exclude='_preview'
+          # We removed the dot from .git* to make sure it catches the hidden folders
+          switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude='.gitignore' --exclude='node_modules/' --exclude='_preview/' --exclude='CLAUDE.md'
           path: ./ 
           remote_path: /home/kansomed/domains/kansomedia.com/public_html/wp-content/themes/flavor/
           remote_host: ${{ secrets.REMOTE_HOST }}
