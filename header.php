@@ -243,6 +243,13 @@
         display: none;
     }
 
+    .site-header__nav > ul > li > .sub-menu {
+        top: auto;
+        left: auto;
+        transform: none;
+        padding-top: 0;
+    }
+
 }
 </style>
 
