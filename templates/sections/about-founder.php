@@ -39,14 +39,14 @@ $image   = flavor_get_image_data(carbon_get_post_meta($post_id, 'about_founder_i
 
 @media (min-width: 768px) {
     .about-founder__inner {
-        grid-template-columns: 300px 1fr;
+        grid-template-columns: 220px 1fr;
         gap: var(--spacing-3xl);
     }
 }
 
 @media (min-width: 1024px) {
     .about-founder__inner {
-        grid-template-columns: 380px 1fr;
+        grid-template-columns: 260px 1fr;
     }
 }
 
@@ -63,8 +63,9 @@ $image   = flavor_get_image_data(carbon_get_post_meta($post_id, 'about_founder_i
 
 .about-founder__photo {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
+    object-position: center 10%;
     border-radius: var(--radius-md);
     display: block;
 }
