@@ -16,8 +16,7 @@ $icon_id    = carbon_get_post_meta($post_id, 'syncfit_hero_icon');
 $icon       = $icon_id ? flavor_get_image_data($icon_id) : null;
 $heading    = carbon_get_post_meta($post_id, 'syncfit_hero_heading') ?: 'Bridge Your Fitbit Data to Apple Health';
 $subtext    = carbon_get_post_meta($post_id, 'syncfit_hero_subtext') ?: 'SyncFit syncs your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.';
-$store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url') ?: '#';
-$badge_path = get_template_directory_uri() . '/assets/images/app-store-badge.svg';
+$store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
 ?>
 
 <!-- ─── Styles ─────────────────────────────────────────────── -->
@@ -153,6 +152,18 @@ $badge_path = get_template_directory_uri() . '/assets/images/app-store-badge.svg
     animation-delay: 0.4s;
 }
 
+.syncfit-hero__coming-soon {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.02em;
+}
+
 @keyframes sf-fadein {
     to {
         opacity: 1;
@@ -199,18 +210,23 @@ $badge_path = get_template_directory_uri() . '/assets/images/app-store-badge.svg
         <p class="syncfit-hero__subtext"><?= esc_html($subtext) ?></p>
 
         <div class="syncfit-hero__badge-wrap">
-            <a href="<?= esc_url($store_url) ?>" target="_blank" rel="noopener noreferrer" aria-label="Download SyncFit on the App Store">
-                <img
-                    src="<?= esc_url($badge_path) ?>"
-                    alt="Download on the App Store"
-                    width="156"
-                    height="52"
-                    class="syncfit-hero__badge"
-                    loading="eager"
-                >
-            </a>
+            <?php if ($store_url): ?>
+                <a href="<?= esc_url($store_url) ?>" target="_blank" rel="noopener noreferrer" aria-label="Download SyncFit on the App Store" class="syncfit-hero__badge">
+                    <svg width="156" height="52" viewBox="0 0 156 52" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Download on the App Store">
+                        <rect width="156" height="52" rx="10" fill="#000"/>
+                        <rect x="0.5" y="0.5" width="155" height="51" rx="9.5" stroke="#fff" stroke-opacity="0.4"/>
+                        <text x="50" y="19" font-family="-apple-system, 'SF Pro Text', sans-serif" font-size="10" fill="#fff" opacity="0.85" letter-spacing="0.3">Download on the</text>
+                        <text x="50" y="37" font-family="-apple-system, 'SF Pro Display', sans-serif" font-size="20" font-weight="600" fill="#fff" letter-spacing="-0.3">App Store</text>
+                        <path d="M26 16.5c2.5-3.1 6.2-3.5 6.2-3.5s.6 3.5-1.9 6.3c-2.7 3-5.7 2.5-5.7 2.5s-.6-3.1 1.4-5.3zm-1.2 6.5c1.4 0 4-.8 5.8-.8 1.9 0 4.9 1 4.9 1S33 26.9 31 29.5c-2 2.7-4.1 5.5-6.6 5.5-2.4 0-3-.9-4.5-.9-1.5 0-3.2.9-4.5.9-2.3 0-5.8-5.4-5.8-5.4S12 26 14.5 24.3c2.5-1.6 4.7-1.3 5.8-1.3z" fill="#fff"/>
+                    </svg>
+                </a>
+            <?php else: ?>
+                <span class="syncfit-hero__coming-soon">Coming Soon to the App Store</span>
+            <?php endif; ?>
         </div>
 
+        <?php if ($store_url): ?>
         <p class="syncfit-hero__pricing">7-day free trial &middot; $2.99/mo after &middot; History Pack $4.99 one-time</p>
+        <?php endif; ?>
     </div>
 </section>

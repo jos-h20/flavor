@@ -9,7 +9,7 @@
 
 // ─── Data ────────────────────────────────────────────────────
 $post_id   = get_the_ID();
-$store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url') ?: '#';
+$store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url');
 ?>
 
 <!-- ─── Styles ─────────────────────────────────────────────── -->
@@ -170,6 +170,22 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url') ?: '
     margin-top: var(--space-md);
 }
 
+.syncfit-pricing__cta[disabled] {
+    background: var(--surface-2);
+    color: var(--text-tertiary);
+    border: 1px solid var(--divider);
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.syncfit-pricing__cta[disabled]:hover {
+    opacity: 0.55;
+}
+
+.syncfit-pricing__cta[disabled]:active {
+    transform: none;
+}
+
 @media (min-width: 768px) {
     .syncfit-pricing {
         padding: 100px var(--space-xxl);
@@ -218,12 +234,16 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url') ?: '
                     <span>Cancel anytime — no commitment</span>
                 </li>
             </ul>
+            <?php if ($store_url): ?>
             <a
                 href="<?= esc_url($store_url) ?>"
                 class="syncfit-pricing__cta syncfit-pricing__cta--primary"
                 target="_blank"
                 rel="noopener noreferrer"
             >Start Free Trial</a>
+            <?php else: ?>
+            <button class="syncfit-pricing__cta syncfit-pricing__cta--primary" disabled>Coming Soon</button>
+            <?php endif; ?>
         </div>
 
         <!-- History Pack Card -->
@@ -251,12 +271,16 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url') ?: '
                     <span>Populates trends in Apple Health, Fitness, and third-party apps</span>
                 </li>
             </ul>
+            <?php if ($store_url): ?>
             <a
                 href="<?= esc_url($store_url) ?>"
                 class="syncfit-pricing__cta syncfit-pricing__cta--secondary"
                 target="_blank"
                 rel="noopener noreferrer"
             >Get History Pack</a>
+            <?php else: ?>
+            <button class="syncfit-pricing__cta syncfit-pricing__cta--secondary" disabled>Coming Soon</button>
+            <?php endif; ?>
             <p class="syncfit-pricing__note">Requires active Pro subscription</p>
         </div>
 
