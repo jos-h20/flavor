@@ -3,13 +3,19 @@
  * Flavor Theme Functions
  */
 
-// --- Carbon Fields ---
+// --- Carbon Fields Bootloader ---
+$flavor_autoloader = get_template_directory() . '/vendor/autoload.php';
 
-require_once get_template_directory() . '/vendor/autoload.php';
-
-add_action('after_setup_theme', function () {
-    \Carbon_Fields\Carbon_Fields::boot();
-});
+if (file_exists($flavor_autoloader)) {
+    require_once $flavor_autoloader;
+    
+    add_action('after_setup_theme', function () {
+        \Carbon_Fields\Carbon_Fields::boot();
+    });
+} else {
+    // Optional: Log an error or show a notice if vendor is missing
+    error_log('Flavor Theme Error: Composer vendor folder is missing.');
+}
 
 // --- Theme Setup ---
 

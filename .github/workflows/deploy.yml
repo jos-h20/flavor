@@ -1,8 +1,8 @@
-name: Deploy Theme to Asura
+name: Deploy Flavor Theme
 on:
   push:
     branches:
-      - main
+      - main  # Set this to your primary branch name
 
 jobs:
   deploy:
@@ -11,13 +11,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3' # Matches your Asura server version
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
       - name: Deploy to Asura via Rsync
         uses: Burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete
+          # Excludes git files, node modules, and Claude's preview folder
+          # --delete ensures files removed from GitHub are also removed from Asura
+          switches: -avzr --delete --exclude='.git*' --exclude='node_modules' --exclude='_preview'
           path: ./ 
-          # Change 'my-awesome-theme' to your actual theme folder name
-          remote_path: /home/kansomed/public_html/wp-content/themes/flavor/
+          remote_path: /home/kansomed/domains/kansomedia.com/public_html/wp-content/themes/flavor/
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_port: ${{ secrets.REMOTE_PORT }}
           remote_user: ${{ secrets.REMOTE_USER }}
