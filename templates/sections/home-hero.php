@@ -187,6 +187,36 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 767px) {
+    .home-hero__content {
+        margin-top: 0;
+        gap: 1rem;
+        padding: 0 1.5rem;
+    }
+
+    .home-hero__tagline {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+    }
+
+    .home-hero__headline {
+        font-size: clamp(1.7rem, 7vw, 2.2rem);
+    }
+
+    .home-hero__ctas {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .home-hero__cta--primary,
+    .home-hero__cta--ghost {
+        width: 100%;
+        text-align: center;
+        padding: 0.9rem 1.5rem;
+    }
+}
 </style>
 
 <!-- --- Markup --- -->
