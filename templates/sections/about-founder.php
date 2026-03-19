@@ -63,16 +63,14 @@ $image   = flavor_get_image_data(carbon_get_post_meta($post_id, 'about_founder_i
 
 .about-founder__photo {
     width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: center 10%;
+    height: auto;
     border-radius: var(--radius-md);
     display: block;
 }
 
 .about-founder__photo-placeholder {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     background: var(--color-bg-alt);
     border-radius: var(--radius-md);
     display: flex;
