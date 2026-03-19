@@ -117,3 +117,43 @@ function flavor_get_image_data($attachment_id) {
         'height' => $src[2],
     ];
 }
+
+// --- Tracking & Code Injection ---
+
+add_action('wp_head', function () {
+    // ── Google Tag Manager ────────────────────────────────
+    $gtm_id = trim(carbon_get_theme_option('gtm_id'));
+    if ($gtm_id) : ?>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','<?= esc_js($gtm_id) ?>');</script>
+<!-- End Google Tag Manager -->
+<?php endif;
+
+    // ── Global head code ──────────────────────────────────
+    $head_code = carbon_get_theme_option('global_head_code');
+    if ($head_code) {
+        echo $head_code . "\n"; // intentionally unescaped — admin-only field
+    }
+}, 1); // priority 1 = before other wp_head output so GTM loads first
+
+add_action('wp_body_open', function () {
+    $gtm_id = trim(carbon_get_theme_option('gtm_id'));
+    if (!$gtm_id) return;
+    ?>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?= esc_attr($gtm_id) ?>"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<?php
+});
+
+add_action('wp_footer', function () {
+    $footer_code = carbon_get_theme_option('global_footer_code');
+    if ($footer_code) {
+        echo $footer_code . "\n"; // intentionally unescaped — admin-only field
+    }
+}, 999); // priority 999 = after all other footer output

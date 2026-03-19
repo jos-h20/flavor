@@ -319,4 +319,19 @@ add_action('carbon_fields_register_fields', function () {
                 ->set_help_text('Optional subtitle shown between the post title and body. Leave blank to omit.'),
         ]);
 
+    // ── Site Settings: Tracking & Code Injection ──────────────
+
+    Container::make('theme_options', 'Site Settings')
+        ->set_icon('dashicons-admin-generic')
+        ->add_fields([
+            Field::make('text', 'gtm_id', 'Google Tag Manager ID')
+                ->set_help_text('e.g. GTM-XXXXXXX — leave blank to disable. The theme outputs both the <head> script and the <body> noscript automatically.'),
+            Field::make('textarea', 'global_head_code', 'Global Head Code')
+                ->set_rows(5)
+                ->set_help_text('Injected before </head> on every page. Use for additional meta tags, font preloads, etc. GTM already handles analytics — use this for anything else.'),
+            Field::make('textarea', 'global_footer_code', 'Global Footer Code')
+                ->set_rows(5)
+                ->set_help_text('Injected before </body> on every page.'),
+        ]);
+
 });
