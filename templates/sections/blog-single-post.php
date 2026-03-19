@@ -296,7 +296,7 @@ $content      = apply_filters('the_content', get_the_content());
                     alt="<?php echo esc_attr($thumb['alt'] ?: get_the_title()); ?>"
                     width="<?php echo esc_attr($thumb['width']); ?>"
                     height="<?php echo esc_attr($thumb['height']); ?>"
-                    loading="lazy"
+                    loading="eager"
                 >
             </figure>
         <?php endif; ?>

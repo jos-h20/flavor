@@ -167,6 +167,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 }, 1); // priority 1 = before other wp_head output so GTM loads first
 
+// --- Featured Image Preload ---
+
+add_action('wp_head', function () {
+    if (!is_singular('post')) return;
+    $thumb_id = get_post_thumbnail_id();
+    if (!$thumb_id) return;
+    $image = flavor_get_image_data($thumb_id);
+    if (!$image || empty($image['url'])) return;
+    echo '<link rel="preload" as="image" href="' . esc_url($image['url']) . '">' . "\n";
+}, 1);
+
 add_action('wp_body_open', function () {
     $gtm_id = trim(carbon_get_theme_option('gtm_id'));
     if (!$gtm_id) return;
