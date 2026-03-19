@@ -203,6 +203,7 @@ $badge_path = get_template_directory_uri() . '/assets/images/app-store-badge.svg
                 <img
                     src="<?= esc_url($badge_path) ?>"
                     alt="Download on the App Store"
+                    width="156"
                     height="52"
                     class="syncfit-hero__badge"
                     loading="eager"
