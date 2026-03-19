@@ -1,0 +1,4 @@
+{
+  "name": "create-post",
+  "description": "Automated blog post pipeline: research, write, generate images, and publish WordPress posts via Claude Code."
+}
