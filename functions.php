@@ -62,6 +62,14 @@ add_action('wp_enqueue_scripts', function () {
     }
 }, 11);
 
+// Exclude Cloudflare Turnstile from LiteSpeed JS optimization
+add_filter('script_loader_tag', function ($tag, $handle) {
+    if ($handle === 'cloudflare-turnstile') {
+        $tag = str_replace('<script ', '<script data-no-optimize="1" ', $tag);
+    }
+    return $tag;
+}, 10, 2);
+
 // --- Performance Cleanup ---
 
 // Remove emoji scripts and styles
