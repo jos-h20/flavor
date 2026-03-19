@@ -55,6 +55,13 @@ add_action('wp_enqueue_scripts', function () {
     }
 });
 
+// Scope Cloudflare Turnstile to contact page only (runs after Turnstile's priority 10 hook)
+add_action('wp_enqueue_scripts', function () {
+    if (!is_page_template('templates/page-contact.php')) {
+        wp_dequeue_script('cloudflare-turnstile');
+    }
+}, 11);
+
 // --- Performance Cleanup ---
 
 // Remove emoji scripts and styles
