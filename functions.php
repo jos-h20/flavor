@@ -43,6 +43,18 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('flavor-style', get_stylesheet_uri(), [], '1.0.0');
 });
 
+// --- Contact Form 7: Load assets on contact page only ---
+
+add_filter('wpcf7_load_js', '__return_false');
+add_filter('wpcf7_load_css', '__return_false');
+
+add_action('wp_enqueue_scripts', function () {
+    if (is_page_template('templates/page-contact.php')) {
+        wpcf7_enqueue_scripts();
+        wpcf7_enqueue_styles();
+    }
+});
+
 // --- Performance Cleanup ---
 
 // Remove emoji scripts and styles
