@@ -2,7 +2,7 @@
 .site-footer {
     background-color: var(--color-bg-dark);
     color: var(--color-text-inverted);
-    padding: var(--spacing-lg) 0 var(--spacing-md);
+    padding: var(--spacing-lg) 0 calc(var(--spacing-md) + env(safe-area-inset-bottom));
 }
 
 .site-footer__container {
