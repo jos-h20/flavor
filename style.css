@@ -124,6 +124,7 @@ a {
 
 html {
     scroll-behavior: smooth;
+    background-color: var(--color-navy-deep);
 }
 
 body {
