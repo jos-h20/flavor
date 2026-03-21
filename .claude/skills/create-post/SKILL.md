@@ -127,20 +127,24 @@ Write the full blog post using **Gutenberg block markup**. Every element must be
 - Write for the target audience identified in Step 1
 - Weave in SEO keywords naturally (don't stuff)
 
-Also generate a **subtitle** (1 sentence, ~10–15 words) that complements the title.
+Also generate:
+- A **subtitle** (1 sentence, ~10–15 words) that complements the title
+- An **SEO meta description** (~150–160 characters) for the `_post_seo_description` field — this powers the `<meta name="description">` tag, Open Graph description, and Twitter Card description
 
-Store the complete post content, title, and subtitle — you'll need them in Step 8.
+Store the complete post content, title, and subtitle internally — you'll need them in Step 8.
+
+**IMPORTANT:** Do NOT output the Gutenberg block markup to the user. Step 4 is internal preparation only. The user sees the content in Step 5.
 
 ---
 
 ## Step 5 — Present Draft
 
-Show the user the full post in a readable format (render the HTML as markdown for readability, but keep the Gutenberg markup stored for publishing).
+**NEVER show Gutenberg block markup to the user.** They cannot review raw HTML. Render the content as clean, readable markdown — headings, paragraphs, lists, code blocks — exactly as it would read on the published page.
 
 Show:
 - **Title**
 - **Subtitle**
-- **Full post content**
+- **Full post content** (rendered as readable markdown, NOT block markup)
 - **Word count**
 
 Ask: "How does this look? I can adjust tone, length, sections, or any specific parts. Say **'good to go'** when you're happy with it."
@@ -170,14 +174,15 @@ Present the prompt to the user and say:
 
 ## Step 7 — Process Image
 
-When the user confirms the image is downloaded:
+The user may either confirm the image is in their Downloads folder, or share/paste the image directly in chat (which gives you the file path).
 
 ### 7a. Find the image
+If the user shared the image directly, use the file path from their message. Otherwise, find the most recent download:
 ```bash
 ls -t ~/Downloads/*.{png,jpg,jpeg,webp} 2>/dev/null | head -5
 ```
 
-Show the user the filename and ask them to confirm it's the right one.
+If finding from Downloads, show the user the filename and ask them to confirm it's the right one.
 
 ### 7b. Generate a human-readable filename
 Create a slug from the post title for the image filename. Example:
@@ -199,7 +204,8 @@ magick identify "<source_file>"
 magick "<source_file>" -format "%[pixel:u.p{<x>,<y>}]" info:
 
 # Paint over the watermark region and resize to 1200x675
-# The watermark is typically in the last ~10% of width and height from the bottom-right corner
+# The watermark is larger than it looks — start aggressive: last ~15% of width, last ~12% of height
+# It's better to paint a slightly larger region on the first try than to iterate 3 times
 magick "<source_file>" \
   -fill "<sampled_color>" \
   -draw "rectangle <x1>,<y1> <W>,<H>" \
@@ -275,26 +281,32 @@ Subtitle contains spaces — use raw SSH:
 ssh -p <port> <user>@<host> "cd ~/domains/<domain>/public_html && ~/bin/wp post meta set <post_id> _post_subtitle '<subtitle>'"
 ```
 
-### 8g. Set category
+### 8g. Set SEO meta description via raw SSH
+Description contains spaces — use raw SSH:
+```bash
+ssh -p <port> <user>@<host> "cd ~/domains/<domain>/public_html && ~/bin/wp post meta set <post_id> _post_seo_description '<seo_description>'"
+```
+
+### 8h. Set category
 Single-word slug — `kansowp` alias is fine:
 ```bash
 zsh -i -c "kansowp post term set <post_id> category <category-slug>" 2>&1
 ```
 
-### 8h. Set author (if specified)
+### 8i. Set author (if specified)
 If the user requested a specific author, update the WordPress user's display name:
 ```bash
 ssh -p <port> <user>@<host> "cd ~/domains/<domain>/public_html && ~/bin/wp user update 1 --display_name='<Author Name>'"
 ```
 Note: This updates the display name site-wide for user ID 1 (the primary admin account).
 
-### 8i. Clean up temp files
+### 8j. Clean up temp files
 ```bash
 rm /tmp/<slug>.jpg /tmp/post-content.html
 ssh -p <port> <user>@<host> "rm -f /tmp/<slug>.jpg /tmp/post-content.html"
 ```
 
-### 8j. Get the draft URL
+### 8k. Get the draft URL
 ```bash
 zsh -i -c "kansowp post get <post_id> --field=url" 2>&1
 ```

@@ -561,6 +561,12 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 
 ---
 
+## Deployment
+
+**Code changes are deployed through GitHub.** Push to the repository and the deployment pipeline handles the rest. Never SCP theme files directly to the live server.
+
+**SSH/WP-CLI is for data operations only:** setting post meta, updating options, importing media, listing posts, etc. These are database operations, not file deployments.
+
 ## Git Workflow
 
 Page structure is version controlled. Use descriptive commit messages:
