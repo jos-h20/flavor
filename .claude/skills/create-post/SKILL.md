@@ -18,7 +18,7 @@ Ask the user for:
 - **Tone** — professional, casual, conversational, authoritative, etc.
 - **Keywords** — any SEO keywords to target (optional)
 - **Category** — blog category if they have a preference (optional)
-- **Author** — author display name (optional, defaults to existing user)
+- **Author** — byline for this post (optional, defaults to WordPress user display name). Stored per-post via `_post_author_display` field.
 
 If the user provided some of this with the `/create-post` command, acknowledge what you have and only ask for what's missing. At minimum you need the topic.
 
@@ -293,12 +293,11 @@ Single-word slug — `kansowp` alias is fine:
 zsh -i -c "kansowp post term set <post_id> category <category-slug>" 2>&1
 ```
 
-### 8i. Set author (if specified)
-If the user requested a specific author, update the WordPress user's display name:
+### 8i. Set author byline (if specified)
+Set the per-post author display name via the `_post_author_display` Carbon Fields field. This overrides the WordPress user display name for this post only. If not set, the post falls back to the WP author.
 ```bash
-ssh -p <port> <user>@<host> "cd ~/domains/<domain>/public_html && ~/bin/wp user update 1 --display_name='<Author Name>'"
+ssh -p <port> <user>@<host> "cd ~/domains/<domain>/public_html && ~/bin/wp post meta set <post_id> _post_author_display '<Author Name>'"
 ```
-Note: This updates the display name site-wide for user ID 1 (the primary admin account).
 
 ### 8j. Clean up temp files
 ```bash
