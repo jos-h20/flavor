@@ -76,8 +76,13 @@ $subheading = carbon_get_post_meta($post_id, 'contact_hero_subheading') ?: 'Tell
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     color: var(--color-white);
     line-height: 1.2;
-    opacity: 0;
-    animation: contact-hero-fade-up 1s ease 1s forwards;
+    /* opacity: 0 removed — h1 must be visible at first paint for LCP */
+    animation: contact-hero-slide-up 0.8s ease 0.15s both;
+}
+
+@keyframes contact-hero-slide-up {
+    from { transform: translateY(14px); }
+    to   { transform: translateY(0); }
 }
 
 .contact-hero__heading em {

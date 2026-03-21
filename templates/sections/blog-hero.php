@@ -72,8 +72,13 @@ $subheading = carbon_get_post_meta($post_id, 'blog_hero_subheading') ?: '';
     color: var(--color-white);
     line-height: 1.15;
     margin-bottom: 0;
-    opacity: 0;
-    animation: blog-hero-fade-up 0.9s ease 0.8s forwards;
+    /* opacity: 0 removed — h1 must be visible at first paint for LCP */
+    animation: blog-hero-slide-up 0.8s ease 0.15s both;
+}
+
+@keyframes blog-hero-slide-up {
+    from { transform: translateY(12px); }
+    to   { transform: translateY(0); }
 }
 
 .blog-hero__subheading {
