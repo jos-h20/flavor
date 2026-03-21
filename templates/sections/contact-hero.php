@@ -106,6 +106,12 @@ $subheading = carbon_get_post_meta($post_id, 'contact_hero_subheading') ?: 'Tell
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+@media (max-width: 767px) {
+    .contact-hero {
+        min-height: 0;
+        padding: 3.5rem var(--spacing-md);
+    }
+}
 </style>
 
 <!-- ─── Markup ─────────────────────────────────────────────── -->

@@ -113,6 +113,12 @@ $subheading = carbon_get_post_meta($post_id, 'blog_hero_subheading') ?: '';
     }
 }
 
+@media (max-width: 767px) {
+    .blog-hero {
+        padding-top: 4rem;
+    }
+}
+
 @media (min-width: 1024px) {
     .blog-hero {
         padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-2xl);

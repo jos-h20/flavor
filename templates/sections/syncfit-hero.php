@@ -25,7 +25,7 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
     position: relative;
     overflow: hidden;
     background: var(--bg);
-    padding: 100px var(--space-xl) 80px;
+    padding: 5rem var(--space-xl) 4rem;
     text-align: center;
     font-family: var(--sf-font);
 }

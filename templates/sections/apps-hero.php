@@ -106,6 +106,13 @@ $subheading = carbon_get_post_meta($post_id, 'apps_hero_subheading') ?: 'Small, 
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 767px) {
+    .apps-hero {
+        min-height: 0;
+        padding: 3.5rem var(--spacing-md);
+    }
+}
 </style>
 
 <!-- ─── Markup ─────────────────────────────────────────────── -->

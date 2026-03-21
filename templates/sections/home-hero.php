@@ -194,6 +194,12 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
 }
 
 @media (max-width: 767px) {
+    .home-hero {
+        height: auto;
+        min-height: 0;
+        padding: 4rem 0 3.5rem;
+    }
+
     .home-hero__content {
         margin-top: 0;
         gap: 1rem;

@@ -106,6 +106,12 @@ $subheading = carbon_get_post_meta($post_id, 'about_hero_subheading') ?: 'Kanso 
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+@media (max-width: 767px) {
+    .about-hero {
+        min-height: 0;
+        padding: 4rem var(--spacing-md);
+    }
+}
 </style>
 
 <!-- ─── Markup ─────────────────────────────────────────────── -->
