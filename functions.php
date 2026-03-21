@@ -89,6 +89,48 @@ require_once get_template_directory() . '/includes/fields.php';
 
 require_once get_template_directory() . '/includes/seo.php';
 
+// --- Sitemap: strip users, taxonomies, and low-value pages ---
+
+// Remove users and taxonomies sub-sitemaps entirely
+add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
+    if (in_array($name, ['users', 'taxonomies'], true)) {
+        return false;
+    }
+    return $provider;
+}, 10, 2);
+
+// Exclude legal, support, and blog landing pages from the pages sitemap
+add_filter('wp_sitemaps_posts_query_args', function ($args, $post_type) {
+    if ($post_type === 'page') {
+        $args['post__not_in'] = [
+            13361, // Kanso SyncFit Support
+            13320, // Kanso SyncFit Terms of Service
+            13315, // Kanso SyncFit Privacy Policy
+            13559, // Blog (archive handled by posts sitemap)
+        ];
+    }
+    return $args;
+}, 10, 2);
+
+// --- Redirects: bare post slugs → correct permalink ---
+// If the permalink structure uses a /blog/ base and someone hits /{slug}/
+// directly, WordPress returns a 404. Detect it and 301 to the real URL.
+
+add_action('template_redirect', function () {
+    if (!is_404()) return;
+
+    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+    // Only handle single-segment paths (e.g. "my-post-slug")
+    if (empty($path) || strpos($path, '/') !== false) return;
+
+    $post = get_page_by_path($path, OBJECT, 'post');
+    if ($post && $post->post_status === 'publish') {
+        wp_redirect(get_permalink($post->ID), 301);
+        exit;
+    }
+});
+
 // --- Admin: Available Sections Notice ---
 
 add_action('admin_notices', function () {
