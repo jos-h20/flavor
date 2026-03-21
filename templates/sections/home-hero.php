@@ -63,6 +63,11 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
     animation: home-hero-twinkle var(--duration) ease-in-out var(--delay) infinite;
 }
 
+.home-hero__star--bright {
+    animation: none;
+    transition: opacity 0.3s ease;
+}
+
 @keyframes home-hero-twinkle {
     0%, 100% { opacity: 0; }
     50%       { opacity: var(--max-opacity); }
@@ -365,5 +370,51 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
         container.appendChild(star);
         placed++;
     }
+
+    // --- Cursor proximity brightening ---
+    var stars  = container.querySelectorAll('.home-hero__star');
+    var radius = 150;
+    var ticking = false;
+    var mouseX = 0, mouseY = 0;
+
+    function updateStars() {
+        var rect = section.getBoundingClientRect();
+        for (var s = 0; s < stars.length; s++) {
+            var el   = stars[s];
+            var sRect = el.getBoundingClientRect();
+            var cx   = sRect.left + sRect.width / 2 - rect.left;
+            var cy   = sRect.top  + sRect.height / 2 - rect.top;
+            var dx   = mouseX - cx;
+            var dy   = mouseY - cy;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < radius) {
+                var brightness = 0.4 + 0.5 * (1 - dist / radius);
+                el.classList.add('home-hero__star--bright');
+                el.style.opacity = brightness;
+            } else if (el.classList.contains('home-hero__star--bright')) {
+                el.classList.remove('home-hero__star--bright');
+                el.style.opacity = '';
+            }
+        }
+        ticking = false;
+    }
+
+    section.addEventListener('mousemove', function (e) {
+        var rect = section.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateStars);
+        }
+    });
+
+    section.addEventListener('mouseleave', function () {
+        for (var s = 0; s < stars.length; s++) {
+            stars[s].classList.remove('home-hero__star--bright');
+            stars[s].style.opacity = '';
+        }
+    });
 })();
 </script>
