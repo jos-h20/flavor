@@ -309,6 +309,18 @@ add_action('carbon_fields_register_fields', function () {
                 ->set_help_text('Optional deck copy shown below the heading.'),
         ]);
 
+    // ── Page SEO (all pages, per-page override) ───────────────
+
+    Container::make('post_meta', 'SEO')
+        ->where('post_type', '=', 'page')
+        ->add_fields([
+            Field::make('textarea', 'page_seo_description', 'Meta Description')
+                ->set_rows(2)
+                ->set_help_text('Overrides the site default. Keep under 160 characters.'),
+            Field::make('image', 'page_seo_og_image', 'Social Sharing Image')
+                ->set_help_text('Overrides the site default. Recommended: 1200×630px.'),
+        ]);
+
     // ── Blog: Single Post extras ──────────────────────────────
 
     Container::make('post_meta', 'Blog Post')
@@ -317,6 +329,11 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('textarea', 'post_subtitle', 'Subtitle / Deck')
                 ->set_rows(2)
                 ->set_help_text('Optional subtitle shown between the post title and body. Leave blank to omit.'),
+            Field::make('textarea', 'post_seo_description', 'Meta Description')
+                ->set_rows(2)
+                ->set_help_text('Overrides excerpt for meta/OG description. Keep under 160 characters.'),
+            Field::make('image', 'post_seo_og_image', 'Social Sharing Image')
+                ->set_help_text('Overrides featured image for social sharing. Recommended: 1200×630px.'),
         ]);
 
     // ── Site Settings: Tracking & Code Injection ──────────────
@@ -332,6 +349,24 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('textarea', 'global_footer_code', 'Global Footer Code')
                 ->set_rows(5)
                 ->set_help_text('Injected before </body> on every page.'),
+            Field::make('separator', 'sep_seo', 'SEO Defaults'),
+            Field::make('textarea', 'site_seo_description', 'Default Meta Description')
+                ->set_rows(2)
+                ->set_help_text('Used on pages that have no custom description set. Keep under 160 characters.'),
+            Field::make('image', 'site_seo_og_image', 'Default Social Sharing Image')
+                ->set_help_text('Fallback OG image for all pages. Recommended: 1200×630px.'),
+            Field::make('separator', 'sep_org', 'Organization Info (for Schema)'),
+            Field::make('text', 'site_org_name',    'Organization Name'),
+            Field::make('text', 'site_org_phone',   'Phone'),
+            Field::make('text', 'site_org_email',   'Email'),
+            Field::make('text', 'site_org_address', 'Street Address'),
+            Field::make('separator', 'sep_social', 'Social Profiles'),
+            Field::make('text', 'site_social_linkedin',  'LinkedIn URL'),
+            Field::make('text', 'site_social_twitter',   'Twitter / X URL'),
+            Field::make('text', 'site_social_instagram', 'Instagram URL'),
+            Field::make('text', 'site_social_facebook',  'Facebook URL'),
+            Field::make('text', 'site_twitter_handle',   'Twitter Handle')
+                ->set_help_text('e.g. kansomedia — without the @. Used for Twitter Card tags.'),
         ]);
 
 });

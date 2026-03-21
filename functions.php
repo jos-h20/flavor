@@ -85,6 +85,10 @@ remove_action('wp_head', 'wp_generator');
 
 require_once get_template_directory() . '/includes/fields.php';
 
+// --- SEO ---
+
+require_once get_template_directory() . '/includes/seo.php';
+
 // --- Admin: Available Sections Notice ---
 
 add_action('admin_notices', function () {
