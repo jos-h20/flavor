@@ -195,7 +195,7 @@ add_action('wp_head', function () {
             'image'           => $og_image ?: null,
             'author'          => [
                 '@type' => 'Person',
-                'name'  => get_the_author_meta('display_name', (int) get_post_field('post_author', $post_id)),
+                'name'  => carbon_get_post_meta($post_id, 'post_author_display') ?: get_the_author_meta('display_name', (int) get_post_field('post_author', $post_id)),
             ],
             'datePublished'   => get_the_date('c', $post_id),
             'dateModified'    => get_the_modified_date('c', $post_id),

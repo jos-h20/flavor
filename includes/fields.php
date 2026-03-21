@@ -326,6 +326,8 @@ add_action('carbon_fields_register_fields', function () {
     Container::make('post_meta', 'Blog Post')
         ->where('post_type', '=', 'post')
         ->add_fields([
+            Field::make('text', 'post_author_display', 'Author Byline')
+                ->set_help_text('Overrides the WordPress user display name for this post. E.g. "Claude Code and Josh Overly". Leave blank to use the default author.'),
             Field::make('textarea', 'post_subtitle', 'Subtitle / Deck')
                 ->set_rows(2)
                 ->set_help_text('Optional subtitle shown between the post title and body. Leave blank to omit.'),

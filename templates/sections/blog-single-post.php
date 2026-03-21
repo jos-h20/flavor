@@ -272,7 +272,7 @@ $content      = apply_filters('the_content', get_the_content());
                 <?php echo esc_html(get_the_date('M j, Y')); ?>
             </time>
             <span class="blog-single-post__meta-sep" aria-hidden="true">·</span>
-            <span><?php echo esc_html(get_the_author()); ?></span>
+            <span><?php echo esc_html(carbon_get_post_meta(get_the_ID(), 'post_author_display') ?: get_the_author()); ?></span>
             <span class="blog-single-post__meta-sep" aria-hidden="true">·</span>
             <span><?php echo esc_html($reading_time); ?> min read</span>
         </div>

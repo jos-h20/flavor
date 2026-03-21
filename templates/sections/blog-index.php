@@ -306,7 +306,7 @@ $query = new WP_Query([
                                     <?php echo esc_html(get_the_date('M j, Y')); ?>
                                 </time>
                                 <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
-                                <span><?php echo esc_html(get_the_author()); ?></span>
+                                <span><?php echo esc_html(carbon_get_post_meta(get_the_ID(), 'post_author_display') ?: get_the_author()); ?></span>
                                 <span class="blog-index__card-meta-sep" aria-hidden="true">·</span>
                                 <span><?php echo esc_html($reading_time); ?> min read</span>
                             </div>
