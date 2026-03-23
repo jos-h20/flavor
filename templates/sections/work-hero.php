@@ -76,12 +76,9 @@ $subheading = carbon_get_post_meta($post_id, 'work_hero_subheading') ?: 'Small, 
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     color: var(--color-white);
     line-height: 1.2;
-    /* opacity: 0 removed — h1 must be visible at first paint for LCP */
-    animation: work-hero-slide-up 0.8s ease 0.15s both;
+    /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
-@keyframes work-hero-slide-up {
-    from { transform: translateY(14px); }
     to   { transform: translateY(0); }
 }
 

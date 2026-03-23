@@ -118,13 +118,7 @@ $cta2_title   = carbon_get_post_meta($post_id, 'home_hero_cta_ghost_title') ?: '
     color: var(--color-white);
     line-height: 1.2;
     max-width: 700px;
-    /* opacity: 0 removed — h1 must be visible at first paint for LCP */
-    animation: home-hero-slide-up 0.8s ease 0.15s both;
-}
-
-@keyframes home-hero-slide-up {
-    from { transform: translateY(14px); }
-    to   { transform: translateY(0); }
+    /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
 .home-hero__headline em {
