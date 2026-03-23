@@ -114,9 +114,6 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
     /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
-    to   { transform: translateY(0); }
-}
-
 .syncfit-hero__subtext {
     font-size: 20px;
     color: var(--text-secondary);

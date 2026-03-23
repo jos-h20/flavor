@@ -79,9 +79,6 @@ $subheading = carbon_get_post_meta($post_id, 'about_hero_subheading') ?: 'Kanso 
     /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
-    to   { transform: translateY(0); }
-}
-
 .about-hero__heading em {
     font-style: italic;
     color: var(--color-slate-light);

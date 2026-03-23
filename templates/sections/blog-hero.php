@@ -75,9 +75,6 @@ $subheading = carbon_get_post_meta($post_id, 'blog_hero_subheading') ?: '';
     /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
-    to   { transform: translateY(0); }
-}
-
 .blog-hero__subheading {
     font-family: var(--font-body);
     font-weight: 200;

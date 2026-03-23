@@ -79,9 +79,6 @@ $subheading = carbon_get_post_meta($post_id, 'contact_hero_subheading') ?: 'Tell
     /* no animation — h1 must render in place for LCP and to avoid flicker */
 }
 
-    to   { transform: translateY(0); }
-}
-
 .contact-hero__heading em {
     font-style: italic;
     color: var(--color-slate-light);
