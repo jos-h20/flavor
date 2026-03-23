@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <style>html,body{background:#0a1628;}</style>
     <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/cormorant-garamond-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/cormorant-garamond-italic-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/jost-latin.woff2" crossorigin>
     <?php wp_head(); ?>
 </head>
