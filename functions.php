@@ -235,6 +235,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <?php
 });
 
+// Include the Posts page (blog index) in the XML sitemap — WordPress excludes it by default.
+add_filter('wp_sitemaps_posts_query_args', function ($args, $post_type) {
+    if ($post_type === 'page') {
+        $page_for_posts = (int) get_option('page_for_posts');
+        if ($page_for_posts && isset($args['post__not_in'])) {
+            $args['post__not_in'] = array_diff($args['post__not_in'], [$page_for_posts]);
+        }
+    }
+    return $args;
+}, 10, 2);
+
 add_action('wp_footer', function () {
     $footer_code = carbon_get_theme_option('global_footer_code');
     if ($footer_code) {
