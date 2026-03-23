@@ -40,4 +40,4 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd ~/domains/kansomedia.com/public_html && wp redis enable 2>/dev/null || true
+          script: cd ~/domains/kansomedia.com/public_html && ~/bin/wp redis enable 2>&1 || echo "WARNING: wp redis enable failed"
