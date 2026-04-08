@@ -70,6 +70,14 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
 }, 10, 2);
 
+// --- Security Hardening ---
+
+// Disable XML-RPC entirely — primary WordPress attack vector for DDoS and brute-force
+add_filter('xmlrpc_enabled', '__return_false');
+
+// Remove XML-RPC discovery link from <head>
+remove_action('wp_head', 'rsd_link');
+
 // --- Performance Cleanup ---
 
 // Remove emoji scripts and styles
