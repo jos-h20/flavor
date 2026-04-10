@@ -40,3 +40,4 @@ jobs:
           script: |
             cd /var/www/kansomedia
             wp redis enable 2>&1 || echo "WARNING: wp redis enable failed"
+            sudo rm -rf /var/run/nginx-cache/* 2>&1 || echo "WARNING: cache purge failed"
