@@ -43,6 +43,33 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('flavor-style', get_stylesheet_uri(), [], '1.0.0');
 });
 
+// Inline critical CSS and async-load the full stylesheet
+add_filter('style_loader_tag', function ($html, $handle) {
+    if ($handle !== 'flavor-style' || is_admin()) {
+        return $html;
+    }
+
+    // Extract the href from the existing tag
+    preg_match('/href=[\'"]([^\'"]+)[\'"]/', $html, $matches);
+    if (empty($matches[1])) return $html;
+    $href = $matches[1];
+
+    // Read and inline critical CSS (tokens, reset, base typography)
+    $critical_file = get_template_directory() . '/assets/critical.css';
+    if (file_exists($critical_file)) {
+        $critical = file_get_contents($critical_file);
+        $inline = '<style id="critical-css">' . $critical . '</style>' . "\n";
+    } else {
+        $inline = '';
+    }
+
+    // Load full stylesheet asynchronously
+    $async = '<link rel="stylesheet" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'">' . "\n";
+    $async .= '<noscript><link rel="stylesheet" href="' . esc_url($href) . '"></noscript>' . "\n";
+
+    return $inline . $async;
+}, 10, 2);
+
 // --- Contact Form 7: Load assets on contact page only ---
 
 add_filter('wpcf7_load_js', '__return_false');
@@ -88,6 +115,16 @@ remove_action('admin_print_styles', 'print_emoji_styles');
 
 // Remove generator meta tag
 remove_action('wp_head', 'wp_generator');
+
+// Dequeue block library CSS on pages that don't use blocks
+add_action('wp_enqueue_scripts', function () {
+    if (is_page_template() && !is_page_template('templates/page-doc.php')) {
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('classic-theme-styles');
+        wp_dequeue_style('global-styles');
+    }
+}, 100);
 
 // --- Carbon Fields Registration ---
 
