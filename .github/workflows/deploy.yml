@@ -2,7 +2,7 @@ name: Deploy Flavor Theme
 on:
   push:
     branches:
-      - main  # Set this to your primary branch name
+      - main
 
 jobs:
   deploy:
@@ -14,20 +14,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3' # Matches your Asura server version
+          php-version: '8.3'
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Deploy to Asura via Rsync
+      - name: Deploy via Rsync
         uses: Burnett01/rsync-deployments@7.0.1
         with:
-          # Excludes git files, node modules, and Claude's preview folder
-          # --delete ensures files removed from GitHub are also removed from Asura
-          # We removed the dot from .git* to make sure it catches the hidden folders
           switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude='.gitignore' --exclude='node_modules/' --exclude='_preview/' --exclude='CLAUDE.md'
-          path: ./ 
-          remote_path: /home/kansomed/domains/kansomedia.com/public_html/wp-content/themes/flavor/
+          path: ./
+          remote_path: /var/www/kansomedia/wp-content/themes/flavor/
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_port: ${{ secrets.REMOTE_PORT }}
           remote_user: ${{ secrets.REMOTE_USER }}
@@ -41,5 +38,5 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/domains/kansomedia.com/public_html
-            ~/bin/wp redis enable 2>&1 || echo "WARNING: wp redis enable failed"
+            cd /var/www/kansomedia
+            wp redis enable 2>&1 || echo "WARNING: wp redis enable failed"
