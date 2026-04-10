@@ -65,7 +65,6 @@ add_filter('style_loader_tag', function ($html, $handle) {
 
     // Load full stylesheet asynchronously
     $async = '<link rel="stylesheet" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'">' . "\n";
-    $async .= '<noscript><link rel="stylesheet" href="' . esc_url($href) . '"></noscript>' . "\n";
 
     return $inline . $async;
 }, 10, 2);
@@ -115,6 +114,20 @@ remove_action('admin_print_styles', 'print_emoji_styles');
 
 // Remove generator meta tag
 remove_action('wp_head', 'wp_generator');
+
+// Remove oEmbed discovery links
+remove_action('wp_head', 'wp_oembed_add_discovery_links');
+
+// Remove REST API link
+remove_action('wp_head', 'rest_output_link_wp_head');
+
+// Remove shortlink
+remove_action('wp_head', 'wp_shortlink_wp_head');
+
+// Remove WP img auto-sizes inline CSS
+add_action('wp_enqueue_scripts', function () {
+    wp_dequeue_style('wp-img-auto-sizes-contain');
+}, 100);
 
 // Dequeue block library CSS on pages that don't use blocks
 add_action('wp_enqueue_scripts', function () {
