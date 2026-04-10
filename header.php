@@ -7,6 +7,7 @@
     <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/cormorant-garamond-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/cormorant-garamond-italic-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/jost-latin.woff2" crossorigin>
+    <link rel="preload" as="style" href="<?php echo get_template_directory_uri(); ?>/style.css?ver=1.0.0">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
