@@ -333,6 +333,22 @@ zsh -i -c "kansowp post get <post_id> --field=url" 2>&1
 Tell the user:
 > **Published!** Your post is live at: [URL]
 
+### 9b. Verify the post appears on the blog index
+
+After publishing, verify the post appears in the blog page HTML — the FastCGI cache may have served a stale version of the blog index that was cached before the post was published.
+
+```bash
+curl -s https://<domain>/blog/ | grep -i "<post-slug>"
+```
+
+If the post slug is found in the HTML, it's live. If not, the blog index is serving a stale cached page — purge the FastCGI cache:
+
+```bash
+ssh <user>@<host> "sudo rm -rf /var/run/nginx-cache/*"
+```
+
+Then confirm with another curl check. Tell the user the post is confirmed live on the blog index.
+
 ---
 
 ## Error Handling
