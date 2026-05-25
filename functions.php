@@ -101,6 +101,13 @@ add_filter('script_loader_tag', function ($tag, $handle) {
 // Disable XML-RPC entirely — primary WordPress attack vector for DDoS and brute-force
 add_filter('xmlrpc_enabled', '__return_false');
 
+// Disable comments REST API endpoints entirely
+add_filter('rest_endpoints', function ($endpoints) {
+    unset($endpoints['/wp/v2/comments']);
+    unset($endpoints['/wp/v2/comments/(?P<id>[\d]+)']);
+    return $endpoints;
+});
+
 // Remove XML-RPC discovery link from <head>
 remove_action('wp_head', 'rsd_link');
 
