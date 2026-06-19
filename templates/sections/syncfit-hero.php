@@ -125,6 +125,13 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
     animation-delay: 0.24s;
 }
 
+.syncfit-hero__purpose {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    margin: 0 0 var(--space-xxl);
+}
+
 .syncfit-hero__badge-wrap {
     display: flex;
     justify-content: center;
@@ -200,11 +207,13 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
             <?php endif; ?>
         </div>
 
-        <p class="syncfit-hero__app-name">SyncFit</p>
+        <p class="syncfit-hero__app-name">Kanso SyncFit</p>
 
         <h1 class="syncfit-hero__heading"><?= esc_html($heading) ?></h1>
 
         <p class="syncfit-hero__subtext"><?= esc_html($subtext) ?></p>
+
+        <p class="syncfit-hero__purpose">Kanso SyncFit securely synchronizes your health and fitness data between Fitbit (Google Health) and Apple Health.</p>
 
         <div class="syncfit-hero__badge-wrap">
             <?php if ($store_url): ?>
