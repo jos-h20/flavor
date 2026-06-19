@@ -9,7 +9,7 @@
 
 // ─── Data ────────────────────────────────────────────────────
 $post_id = get_the_ID();
-$heading = carbon_get_post_meta($post_id, 'syncfit_metrics_heading') ?: '25 Health Metrics Supported';
+$heading = carbon_get_post_meta($post_id, 'syncfit_metrics_heading') ?: '26 Health Metrics Supported';
 
 $categories = [
     [
@@ -20,7 +20,8 @@ $categories = [
             ['icon' => '📍', 'name' => 'Distance'],
             ['icon' => '🏢', 'name' => 'Flights Climbed'],
             ['icon' => '⏱️', 'name' => 'Active Minutes'],
-            ['icon' => '🚶', 'name' => 'Sedentary Minutes'],
+            ['icon' => '🚶', 'name' => 'Walking Speed'],
+            ['icon' => '🏃', 'name' => 'Running Speed'],
         ],
     ],
     [
@@ -38,9 +39,9 @@ $categories = [
             ['icon' => '❤️', 'name' => 'Heart Rate (Intraday)'],
             ['icon' => '💙', 'name' => 'Resting Heart Rate'],
             ['icon' => '🩸', 'name' => 'Blood Oxygen (SpO2)'],
-            ['icon' => '🫁', 'name' => 'Breathing Rate'],
-            ['icon' => '💓', 'name' => 'Heart Rate Variability (HRV)'],
-            ['icon' => '🌡️', 'name' => 'Skin Temperature'],
+            ['icon' => '🫁', 'name' => 'Respiratory Rate'],
+            ['icon' => '🌡️', 'name' => 'Body Temperature'],
+            ['icon' => '🫀', 'name' => 'VO2 Max'],
         ],
     ],
     [
@@ -60,7 +61,6 @@ $categories = [
             ['icon' => '🌙', 'name' => 'Time Asleep'],
             ['icon' => '💤', 'name' => 'Sleep Stages (REM, Light, Deep)'],
             ['icon' => '🛌', 'name' => 'Time in Bed'],
-            ['icon' => '⭐', 'name' => 'Sleep Score'],
         ],
     ],
     [
