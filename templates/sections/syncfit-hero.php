@@ -92,26 +92,36 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
 }
 
 .syncfit-hero__app-name {
-    font-size: 14px;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-lg);
+    /* no animation — h1 must render in place for LCP and to avoid flicker */
+}
+
+.syncfit-hero__heading {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text-secondary);
-    margin-bottom: var(--space-lg);
+    line-height: 1.3;
+    margin: 0 0 var(--space-xl);
     opacity: 0;
     transform: translateY(20px);
     animation: sf-fadein 0.5s ease forwards;
     animation-delay: 0.08s;
 }
 
-.syncfit-hero__heading {
-    font-size: clamp(2rem, 5vw, 2.75rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin: 0 0 var(--space-xl);
-    /* no animation — h1 must render in place for LCP and to avoid flicker */
+.syncfit-hero__purpose {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 var(--space-xxl);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: sf-fadein 0.5s ease forwards;
+    animation-delay: 0.16s;
 }
 
 .syncfit-hero__subtext {
@@ -123,13 +133,6 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
     transform: translateY(20px);
     animation: sf-fadein 0.5s ease forwards;
     animation-delay: 0.24s;
-}
-
-.syncfit-hero__purpose {
-    font-size: 14px;
-    color: var(--text-tertiary);
-    line-height: 1.5;
-    margin: 0 0 var(--space-xxl);
 }
 
 .syncfit-hero__badge-wrap {
@@ -207,13 +210,13 @@ $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
             <?php endif; ?>
         </div>
 
-        <p class="syncfit-hero__app-name">Kanso SyncFit</p>
+        <h1 class="syncfit-hero__app-name">Kanso SyncFit</h1>
 
-        <h1 class="syncfit-hero__heading"><?= esc_html($heading) ?></h1>
+        <p class="syncfit-hero__heading"><?= esc_html($heading) ?></p>
+
+        <p class="syncfit-hero__purpose">The purpose of Kanso SyncFit is to securely synchronize your health and fitness data between Fitbit (Google Health) and Apple Health.</p>
 
         <p class="syncfit-hero__subtext"><?= esc_html($subtext) ?></p>
-
-        <p class="syncfit-hero__purpose">Kanso SyncFit securely synchronizes your health and fitness data between Fitbit (Google Health) and Apple Health.</p>
 
         <div class="syncfit-hero__badge-wrap">
             <?php if ($store_url): ?>
