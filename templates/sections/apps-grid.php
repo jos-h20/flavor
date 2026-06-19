@@ -19,7 +19,7 @@ $fallback_items = [
     [
         'icon'    => '',
         'name'    => 'SyncFit',
-        'tagline' => 'Sync your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.',
+        'tagline' => 'Sync your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.',
         'url'     => '/syncfit',
     ],
 ];

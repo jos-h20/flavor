@@ -14,8 +14,8 @@
 $post_id    = get_the_ID();
 $icon_id    = carbon_get_post_meta($post_id, 'syncfit_hero_icon');
 $icon       = $icon_id ? flavor_get_image_data($icon_id) : null;
-$heading    = carbon_get_post_meta($post_id, 'syncfit_hero_heading') ?: 'Bridge Your Fitbit Data to Apple Health';
-$subtext    = carbon_get_post_meta($post_id, 'syncfit_hero_subtext') ?: 'SyncFit syncs your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.';
+$heading    = carbon_get_post_meta($post_id, 'syncfit_hero_heading') ?: 'Bridge Your Fitbit (Google Health) Data to Apple Health';
+$subtext    = carbon_get_post_meta($post_id, 'syncfit_hero_subtext') ?: 'SyncFit syncs your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.';
 $store_url  = carbon_get_post_meta($post_id, 'syncfit_hero_appstore_url');
 ?>
 

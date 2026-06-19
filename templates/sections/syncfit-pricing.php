@@ -251,12 +251,12 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url');
             <span class="syncfit-pricing__badge syncfit-pricing__badge--history">Add-on</span>
             <h3 class="syncfit-pricing__plan-name">History Pack</h3>
             <p class="syncfit-pricing__price">$4.99<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary)"> one-time</span></p>
-            <p class="syncfit-pricing__price-detail">Unlock your full Fitbit history</p>
+            <p class="syncfit-pricing__price-detail">Unlock your full Fitbit (Google Health) history</p>
             <div class="syncfit-pricing__divider"></div>
             <ul class="syncfit-pricing__features">
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
-                    <span>Backfill up to 1 year of historical Fitbit data</span>
+                    <span>Backfill up to 5 years of historical Fitbit (Google Health) data</span>
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>

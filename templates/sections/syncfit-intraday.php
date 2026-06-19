@@ -11,7 +11,7 @@
 // ─── Data ────────────────────────────────────────────────────
 $post_id    = get_the_ID();
 $heading    = carbon_get_post_meta($post_id, 'syncfit_intraday_heading') ?: 'Intraday Data, Done Right';
-$subheading = carbon_get_post_meta($post_id, 'syncfit_intraday_subheading') ?: 'SyncFit pulls minute-by-minute data from Fitbit\'s API — the same detail your Fitbit app shows you — and writes it to Apple Health in the correct format.';
+$subheading = carbon_get_post_meta($post_id, 'syncfit_intraday_subheading') ?: 'SyncFit pulls minute-by-minute data from the Google Health API — the same detail your Fitbit (Google Health) app shows you — and writes it to Apple Health in the correct format.';
 
 $cards = [
     [
@@ -42,7 +42,7 @@ $cards = [
     [
         'icon'        => '🏢',
         'name'        => 'Flights Climbed',
-        'description' => 'Floor-level elevation data pulled from Fitbit and mapped to Apple Health floors.',
+        'description' => 'Floor-level elevation data pulled from Fitbit (Google Health) and mapped to Apple Health floors.',
     ],
 ];
 ?>

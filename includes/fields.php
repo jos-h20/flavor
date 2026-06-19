@@ -220,7 +220,7 @@ add_action('carbon_fields_register_fields', function () {
         ->add_fields([
             Field::make('complex', 'apps_grid_items', 'Apps')
                 ->set_default_value([
-                    ['icon' => '', 'name' => 'SyncFit', 'tagline' => 'Sync your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.', 'url' => '/syncfit'],
+                    ['icon' => '', 'name' => 'SyncFit', 'tagline' => 'Sync your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.', 'url' => '/syncfit'],
                 ])
                 ->add_fields([
                     Field::make('image',    'icon',    'App Icon'),
@@ -239,9 +239,9 @@ add_action('carbon_fields_register_fields', function () {
         ->add_fields([
             Field::make('image',    'syncfit_hero_icon',         'App Icon'),
             Field::make('text',     'syncfit_hero_heading',      'Heading')
-                ->set_default_value('Bridge Your Fitbit Data to Apple Health'),
+                ->set_default_value('Bridge Your Fitbit (Google Health) Data to Apple Health'),
             Field::make('textarea', 'syncfit_hero_subtext',      'Subtext')
-                ->set_default_value('SyncFit syncs your Fitbit metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.')
+                ->set_default_value('SyncFit syncs your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.')
                 ->set_rows(2),
             Field::make('text',     'syncfit_hero_appstore_url', 'App Store URL'),
         ]);
@@ -254,7 +254,7 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('text',     'syncfit_intraday_heading',    'Heading')
                 ->set_default_value('Intraday Data, Done Right'),
             Field::make('textarea', 'syncfit_intraday_subheading', 'Subheading')
-                ->set_default_value('SyncFit pulls minute-by-minute data from Fitbit\'s API — the same detail your Fitbit app shows you — and writes it to Apple Health in the correct format.')
+                ->set_default_value('SyncFit pulls minute-by-minute data from the Google Health API — the same detail your Fitbit (Google Health) app shows you — and writes it to Apple Health in the correct format.')
                 ->set_rows(2),
         ]);
 
@@ -292,7 +292,7 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('text',     'syncfit_privacy_heading', 'Heading')
                 ->set_default_value('Your Data Stays Yours'),
             Field::make('textarea', 'syncfit_privacy_body',    'Body')
-                ->set_default_value('SyncFit connects directly to Fitbit\'s official API using OAuth. Your Fitbit credentials are never stored by SyncFit — authentication is handled entirely by Fitbit. Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.')
+                ->set_default_value('SyncFit connects directly to the Google Health API using OAuth. Your Fitbit (Google Health) credentials are never stored by SyncFit — authentication is handled entirely by Fitbit (Google Health). Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.')
                 ->set_rows(3),
         ]);
 

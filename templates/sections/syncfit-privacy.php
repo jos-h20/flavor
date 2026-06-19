@@ -11,7 +11,7 @@
 // ─── Data ────────────────────────────────────────────────────
 $post_id = get_the_ID();
 $heading = carbon_get_post_meta($post_id, 'syncfit_privacy_heading') ?: 'Your Data Stays Yours';
-$body    = carbon_get_post_meta($post_id, 'syncfit_privacy_body') ?: 'SyncFit connects directly to Fitbit\'s official API using OAuth. Your Fitbit credentials are never stored by SyncFit — authentication is handled entirely by Fitbit. Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.';
+$body    = carbon_get_post_meta($post_id, 'syncfit_privacy_body') ?: 'SyncFit connects directly to the Google Health API using OAuth. Your Fitbit (Google Health) credentials are never stored by SyncFit — authentication is handled entirely by Fitbit (Google Health). Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.';
 ?>
 
 <!-- ─── Styles ─────────────────────────────────────────────── -->
@@ -72,6 +72,12 @@ $body    = carbon_get_post_meta($post_id, 'syncfit_privacy_body') ?: 'SyncFit co
     font-weight: 600;
 }
 
+.syncfit-privacy__disclaimer {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin: var(--space-lg) 0 0;
+}
+
 @media (min-width: 768px) {
     .syncfit-privacy {
         padding: 100px var(--space-xxl);
@@ -91,7 +97,8 @@ $body    = carbon_get_post_meta($post_id, 'syncfit_privacy_body') ?: 'SyncFit co
         <p class="syncfit-privacy__body"><?= esc_html($body) ?></p>
         <span class="syncfit-privacy__chip">
             <span aria-hidden="true">✓</span>
-            Requires Fitbit account &amp; Apple Health access
+            Requires Fitbit (Google Health) account &amp; Apple Health access
         </span>
+        <p class="syncfit-privacy__disclaimer">SyncFit is not affiliated with, sponsored by, or endorsed by Google LLC, Fitbit LLC, or Apple Inc.</p>
     </div>
 </section>

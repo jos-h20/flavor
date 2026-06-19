@@ -17,8 +17,8 @@ $steps = [
         'description' => 'Get SyncFit from the App Store and start your 7-day free trial.',
     ],
     [
-        'title'       => 'Connect Fitbit',
-        'description' => 'Sign in with your Fitbit account. SyncFit will request read access to your health data.',
+        'title'       => 'Connect Fitbit (Google Health)',
+        'description' => 'Sign in with your Fitbit (Google Health) account. SyncFit will request read access to your health data.',
     ],
     [
         'title'       => 'Grant Apple Health Access',
