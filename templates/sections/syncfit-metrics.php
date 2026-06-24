@@ -2,14 +2,14 @@
 /**
  * Section: All Metrics
  * Page: SyncFit
- * Description: All 25 supported health metrics grouped into 6 categories in a 2-col grid.
+ * Description: All 24 supported health metrics grouped into 6 categories in a 2-col grid.
  * Fields:
  *   - syncfit_metrics_heading (text): Section heading
  */
 
 // ─── Data ────────────────────────────────────────────────────
 $post_id = get_the_ID();
-$heading = carbon_get_post_meta($post_id, 'syncfit_metrics_heading') ?: '26 Health Metrics Supported';
+$heading = carbon_get_post_meta($post_id, 'syncfit_metrics_heading') ?: '24 Health Metrics Supported';
 
 $categories = [
     [
@@ -17,9 +17,11 @@ $categories = [
         'name'    => 'Activity',
         'metrics' => [
             ['icon' => '👣', 'name' => 'Steps'],
+            ['icon' => '❤️', 'name' => 'Heart Rate'],
+            ['icon' => '💙', 'name' => 'Resting Heart Rate'],
+            ['icon' => '😴', 'name' => 'Sleep'],
             ['icon' => '📍', 'name' => 'Distance'],
             ['icon' => '🏢', 'name' => 'Flights Climbed'],
-            ['icon' => '⏱️', 'name' => 'Active Minutes'],
             ['icon' => '🚶', 'name' => 'Walking Speed'],
             ['icon' => '🏃', 'name' => 'Running Speed'],
         ],
@@ -28,50 +30,46 @@ $categories = [
         'icon'    => '🔥',
         'name'    => 'Energy',
         'metrics' => [
-            ['icon' => '⚡', 'name' => 'Active Energy Burned'],
-            ['icon' => '🍽️', 'name' => 'Resting Energy (BMR)'],
+            ['icon' => '⚡', 'name' => 'Active Energy'],
+            ['icon' => '🍽️', 'name' => 'Resting Energy'],
+            ['icon' => '🍎', 'name' => 'Dietary Energy'],
         ],
     ],
     [
-        'icon'    => '❤️',
+        'icon'    => '🥗',
+        'name'    => 'Nutrition',
+        'metrics' => [
+            ['icon' => '💧', 'name' => 'Water'],
+        ],
+    ],
+    [
+        'icon'    => '🩺',
         'name'    => 'Vitals',
         'metrics' => [
-            ['icon' => '❤️', 'name' => 'Heart Rate (Intraday)'],
-            ['icon' => '💙', 'name' => 'Resting Heart Rate'],
             ['icon' => '🩸', 'name' => 'Blood Oxygen (SpO2)'],
             ['icon' => '🫁', 'name' => 'Respiratory Rate'],
-            ['icon' => '🌡️', 'name' => 'Body Temperature'],
             ['icon' => '🫀', 'name' => 'VO2 Max'],
+            ['icon' => '🌡️', 'name' => 'Body Temperature'],
         ],
     ],
     [
         'icon'    => '💪',
         'name'    => 'Workouts',
         'metrics' => [
-            ['icon' => '🏋️', 'name' => 'Workout Sessions'],
-            ['icon' => '⏰', 'name' => 'Workout Duration'],
-            ['icon' => '🔥', 'name' => 'Workout Calories'],
-            ['icon' => '📏', 'name' => 'Workout Distance'],
+            ['icon' => '🏋️', 'name' => 'Workouts'],
+            ['icon' => '🚴', 'name' => 'Cycling Distance'],
+            ['icon' => '🚴', 'name' => 'Cycling Speed'],
+            ['icon' => '🏊', 'name' => 'Swimming Distance'],
         ],
     ],
     [
-        'icon'    => '😴',
-        'name'    => 'Sleep',
+        'icon'    => '⚖️',
+        'name'    => 'Body',
         'metrics' => [
-            ['icon' => '🌙', 'name' => 'Time Asleep'],
-            ['icon' => '💤', 'name' => 'Sleep Stages (REM, Light, Deep)'],
-            ['icon' => '🛌', 'name' => 'Time in Bed'],
-        ],
-    ],
-    [
-        'icon'    => '🥗',
-        'name'    => 'Nutrition & Body',
-        'metrics' => [
-            ['icon' => '💧', 'name' => 'Water Intake'],
-            ['icon' => '🍎', 'name' => 'Calories Consumed'],
-            ['icon' => '⚖️', 'name' => 'Body Weight'],
-            ['icon' => '📊', 'name' => 'Body Fat Percentage'],
+            ['icon' => '⚖️', 'name' => 'Weight'],
+            ['icon' => '📊', 'name' => 'Body Fat %'],
             ['icon' => '📐', 'name' => 'BMI'],
+            ['icon' => '🧍', 'name' => 'Lean Body Mass'],
         ],
     ],
 ];

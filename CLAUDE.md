@@ -567,6 +567,8 @@ $style = $bg ? 'background-image: url(' . esc_url($bg['url']) . ')' : '';
 
 **SSH/WP-CLI is for data operations only:** setting post meta, updating options, importing media, listing posts, etc. These are database operations, not file deployments.
 
+**Never start or rely on a local dev server (e.g. `kansomedia.local`) to verify changes.** It is not reliably running. To verify a change rendered correctly, check the live page directly — e.g. `curl` the live URL, or SSH into the server (see WP-CLI reference) and inspect the deployed file/page output after a push.
+
 ## Git Workflow
 
 Page structure is version controlled. Use descriptive commit messages:

@@ -223,7 +223,7 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url');
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
-                    <span>25 health metrics written to Apple Health</span>
+                    <span>24 health metrics written to Apple Health</span>
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
@@ -260,7 +260,7 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url');
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
-                    <span>All 25 metrics synced historically, not just recent data</span>
+                    <span>All 24 metrics synced historically, not just recent data</span>
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
