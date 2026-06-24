@@ -25,11 +25,6 @@ $cards = [
         'description' => 'Continuous BPM readings captured every few seconds and written to Apple Health.',
     ],
     [
-        'icon'        => '🩸',
-        'name'        => 'Blood Oxygen (SpO2)',
-        'description' => 'SpO2 measurements from overnight tracking and on-demand readings.',
-    ],
-    [
         'icon'        => '🔥',
         'name'        => 'Active Energy',
         'description' => 'Active calorie burn segmented by time of day, not a single end-of-day estimate.',

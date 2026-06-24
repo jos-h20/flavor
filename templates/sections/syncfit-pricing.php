@@ -219,7 +219,7 @@ $store_url = carbon_get_post_meta($post_id, 'syncfit_pricing_appstore_url');
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
-                    <span>Intraday data: steps, heart rate, SpO2, active energy, distance, floors</span>
+                    <span>Intraday data: steps, heart rate, active energy, distance, floors</span>
                 </li>
                 <li class="syncfit-pricing__feature">
                     <span class="syncfit-pricing__feature-check" aria-hidden="true">✓</span>
