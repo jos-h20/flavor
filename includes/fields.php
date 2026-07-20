@@ -221,6 +221,7 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('complex', 'apps_grid_items', 'Apps')
                 ->set_default_value([
                     ['icon' => '', 'name' => 'SyncFit', 'tagline' => 'Sync your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.', 'url' => '/syncfit'],
+                    ['icon' => '', 'name' => 'Uncouch', 'tagline' => 'A voice-guided run/walk coach that takes you from one minute of running to a full hour. Your coach is in your pocket.', 'url' => '/uncouch'],
                 ])
                 ->add_fields([
                     Field::make('image',    'icon',    'App Icon'),
@@ -294,6 +295,63 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('textarea', 'syncfit_privacy_body',    'Body')
                 ->set_default_value('SyncFit connects directly to the Google Health API using OAuth. Your Fitbit (Google Health) credentials are never stored by SyncFit — authentication is handled entirely by Fitbit (Google Health). Health data is written locally to Apple Health on your device and never transmitted to our servers. No ads, no data brokering, no tracking.')
                 ->set_rows(3),
+        ]);
+
+
+    // ── Uncouch: Hero ─────────────────────────────────────────
+
+    Container::make('post_meta', 'Uncouch — Hero')
+        ->where('post_template', '=', 'templates/page-uncouch.php')
+        ->add_fields([
+            Field::make('image',    'uncouch_hero_icon',         'App Icon'),
+            Field::make('text',     'uncouch_hero_heading',      'Tagline')
+                ->set_default_value('From one minute to one hour — a running coach in your pocket.'),
+            Field::make('textarea', 'uncouch_hero_subtext',      'Intro')
+                ->set_default_value('A real-sounding coach talks you through every jog and walk interval, so you never have to wonder what to do next — just lace up and go.')
+                ->set_rows(2),
+            Field::make('text',     'uncouch_hero_appstore_url', 'App Store URL')
+                ->set_help_text('Leave blank to show the "Coming Soon to the App Store" badge.'),
+        ]);
+
+    // ── Uncouch: Features ─────────────────────────────────────
+
+    Container::make('post_meta', 'Uncouch — Features')
+        ->where('post_template', '=', 'templates/page-uncouch.php')
+        ->add_fields([
+            Field::make('text', 'uncouch_features_heading', 'Heading')
+                ->set_default_value('Everything you need to keep running'),
+        ]);
+
+    // ── Uncouch: Pricing ──────────────────────────────────────
+
+    Container::make('post_meta', 'Uncouch — Pricing')
+        ->where('post_template', '=', 'templates/page-uncouch.php')
+        ->add_fields([
+            Field::make('text', 'uncouch_pricing_appstore_url', 'App Store URL (CTA)')
+                ->set_help_text('Leave blank to show "Coming Soon" on the pricing buttons.'),
+        ]);
+
+    // ── Uncouch: How It Works ─────────────────────────────────
+
+    Container::make('post_meta', 'Uncouch — How It Works')
+        ->where('post_template', '=', 'templates/page-uncouch.php')
+        ->add_fields([
+            Field::make('text', 'uncouch_hiw_heading', 'Heading')
+                ->set_default_value('Up and running in minutes'),
+        ]);
+
+    // ── Uncouch: Privacy ──────────────────────────────────────
+
+    Container::make('post_meta', 'Uncouch — Privacy')
+        ->where('post_template', '=', 'templates/page-uncouch.php')
+        ->add_fields([
+            Field::make('text',     'uncouch_privacy_heading',    'Heading')
+                ->set_default_value('Your data stays yours'),
+            Field::make('textarea', 'uncouch_privacy_body',       'Body')
+                ->set_default_value('Uncouch works entirely on your device. There\'s no account, no sign-in, and nothing sent to a server. Your location is used only during a workout — to measure distance and keep coaching while your phone is locked — and it never leaves your phone.')
+                ->set_rows(3),
+            Field::make('text',     'uncouch_privacy_policy_url',  'Privacy Policy URL')
+                ->set_default_value('/privacy-policy'),
         ]);
 
 

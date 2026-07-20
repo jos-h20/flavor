@@ -22,6 +22,12 @@ $fallback_items = [
         'tagline' => 'Sync your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.',
         'url'     => '/syncfit',
     ],
+    [
+        'icon'    => '',
+        'name'    => 'Uncouch',
+        'tagline' => 'A voice-guided run/walk coach that takes you from one minute of running to a full hour. Your coach is in your pocket.',
+        'url'     => '/uncouch',
+    ],
 ];
 
 $items = $items ?: $fallback_items;
