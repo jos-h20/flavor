@@ -26,7 +26,7 @@ $fallback_items = [
         'icon'    => '',
         'name'    => 'Uncouch',
         'tagline' => 'A voice-guided run/walk coach that takes you from one minute of running to a full hour. Your coach is in your pocket.',
-        'url'     => '/uncouch',
+        'url'     => '/apps/uncouch/',
     ],
 ];
 

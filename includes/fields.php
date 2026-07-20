@@ -221,7 +221,7 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('complex', 'apps_grid_items', 'Apps')
                 ->set_default_value([
                     ['icon' => '', 'name' => 'SyncFit', 'tagline' => 'Sync your Fitbit (Google Health) metrics — including intraday data — directly into Apple Health. No shortcuts, no gaps.', 'url' => '/syncfit'],
-                    ['icon' => '', 'name' => 'Uncouch', 'tagline' => 'A voice-guided run/walk coach that takes you from one minute of running to a full hour. Your coach is in your pocket.', 'url' => '/uncouch'],
+                    ['icon' => '', 'name' => 'Uncouch', 'tagline' => 'A voice-guided run/walk coach that takes you from one minute of running to a full hour. Your coach is in your pocket.', 'url' => '/apps/uncouch/'],
                 ])
                 ->add_fields([
                     Field::make('image',    'icon',    'App Icon'),
