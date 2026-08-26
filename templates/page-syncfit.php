@@ -36,7 +36,7 @@ body {
 }
 </style>
 
-<main>
+<main id="main-content">
     <?php include get_template_directory() . '/templates/sections/syncfit-hero.php'; ?>
     <?php include get_template_directory() . '/templates/sections/syncfit-intraday.php'; ?>
     <?php include get_template_directory() . '/templates/sections/syncfit-pricing.php'; ?>

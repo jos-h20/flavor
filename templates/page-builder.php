@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-<main>
+<main id="main-content">
     <?php
     $sections = carbon_get_the_post_meta('sections');
 

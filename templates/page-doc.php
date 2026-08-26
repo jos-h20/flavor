@@ -157,7 +157,7 @@ get_header(); ?>
 }
 </style>
 
-<main class="doc">
+<main id="main-content" class="doc">
     <div class="doc__inner">
 
         <h1 class="doc__title"><?= esc_html(get_the_title()) ?></h1>

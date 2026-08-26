@@ -36,7 +36,7 @@ body {
 }
 </style>
 
-<main>
+<main id="main-content">
     <?php include get_template_directory() . '/templates/sections/uncouch-hero.php'; ?>
     <?php include get_template_directory() . '/templates/sections/uncouch-features.php'; ?>
     <?php include get_template_directory() . '/templates/sections/uncouch-pricing.php'; ?>

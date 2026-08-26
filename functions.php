@@ -295,6 +295,7 @@ add_action('wp_body_open', function () {
     ?>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?= esc_attr($gtm_id) ?>"
+title="Google Tag Manager"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <?php

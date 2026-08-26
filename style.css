@@ -87,14 +87,14 @@ a {
     --color-navy-deep:   #0a1628;
     --color-navy-mid:    #0f2040;
     --color-navy-light:  #1a3557;
-    --color-slate:       #4a7fa5;
+    --color-slate:       #3e6b8b;
     --color-slate-light: #a8cde8;
     --color-white:       #e8f0f8;
     --color-white-dim:   rgba(232, 240, 248, 0.88);
     --color-white-faint: rgba(232, 240, 248, 0.15);
-    --color-km-blue:     #2276c4;
+    --color-km-blue:     #1e69ae;
     --color-km-brown:    #8a5929;
-    --color-km-green:    #137e1d;
+    --color-km-green:    #12771b;
 
     /* ── Semantic Tokens ────────────────────────────────────── */
     --color-primary:        var(--color-slate);
@@ -253,4 +253,36 @@ code {
 :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+}
+
+/* ─── Skip Link ───────────────────────────────────────────── */
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

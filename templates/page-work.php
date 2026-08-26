@@ -4,7 +4,7 @@
  */
 get_header(); ?>
 
-<main>
+<main id="main-content">
     <?php include get_template_directory() . '/templates/sections/work-hero.php'; ?>
     <?php include get_template_directory() . '/templates/sections/work-grid.php'; ?>
 </main>

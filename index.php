@@ -9,7 +9,7 @@
 get_header();
 ?>
 
-<main class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
+<main id="main-content" class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
     <?php
     if (have_posts()) :
         while (have_posts()) : the_post();

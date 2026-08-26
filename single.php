@@ -9,7 +9,7 @@
 get_header();
 ?>
 
-<main>
+<main id="main-content">
     <?php while (have_posts()) : the_post(); ?>
         <?php include get_template_directory() . '/templates/sections/blog-single-post.php'; ?>
         <?php include get_template_directory() . '/templates/sections/blog-single-nav.php'; ?>

@@ -12,6 +12,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="skip-link" href="#main-content">Skip to content</a>
+
 <style>
 .site-header {
     position: sticky;

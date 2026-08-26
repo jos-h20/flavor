@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-<main>
+<main id="main-content">
     <?php include get_template_directory() . '/templates/sections/about-hero.php'; ?>
     <?php include get_template_directory() . '/templates/sections/about-values.php'; ?>
     <?php include get_template_directory() . '/templates/sections/about-approach.php'; ?>
